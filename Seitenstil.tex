@@ -1,0 +1,44 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root =  Bachelorarbeit.tex
+
+% Zeilenabstand 1,5 Zeilen ---------------------------------------------------------------------
+\onehalfspacing{}
+
+
+% Seitenränder ------------------------------------------------------------------------------------
+\setlength{\topskip}{\ht\strutbox} % behebt Warnung von geometry
+\geometry{paper=a4paper,left=21mm,right=30mm,top=30mm,bottom=20mm}
+
+
+% Kopf- und Fußzeilen --------------------------------------------------------------------------
+\pagestyle{scrheadings}
+\renewcommand*{\chapterpagestyle}{scrheadings} 
+
+%% Kopfzeile 
+\ihead{} %linke Seite
+\chead{} %mittlere Seite
+\ohead{\pagemark} %rechte Seite
+\setheadsepline[text]{0.4pt} % Trennlinie unter Kopfzeile
+
+
+% Fußzeile
+\ifoot{}
+\cfoot{} %mittlere Seite
+\ofoot{} %rechte Seite
+\renewcommand{\footnotesize}{\fontsize{10pt}{12pt}\selectfont} % Fußnoten in 10pt
+
+
+% sonstige typographische Einstellungen ---------------------------------------------------
+\frenchspacing{}
+\clubpenalty = 10000
+\widowpenalty = 10000 
+\displaywidowpenalty = 10000
+
+% Quellcode-Ausgabe formatieren
+\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, breaklines=true}
+\lstset{emph={square}, emphstyle=\color{red}, emph={[2]root,base}, emphstyle={[2]\color{blue}}}
+
+% Fußnoten fortlaufend durchnummerieren
+\counterwithout{footnote}{chapter}
+
+
