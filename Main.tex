@@ -1,0 +1,100 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root =  Main.tex
+%------------------------------------------------------------------------------
+%	Formatvorlage für wissenschaftliche Arbeiten (Diplomarbeit, Bachelorarbeit, Masterarbeit)
+%------------------------------------------------------------------------------
+%	Version: 2.0
+%	Datum: 06.06.2025
+
+
+% Dokumentenkopf ---------------------------------------------------------------------------------------
+%   Diese Vorlage basiert auf "scrreprt" aus dem koma-script.
+% ------------------------------------------------------------------------------------------------------
+\documentclass[
+    12pt, % Schriftgröße
+    DIV=10, % Änderung der Größe des Satzspiegels (bedruckbarer Bereich einer Seite), nur in Verbindung mit koma-script verwendbar
+    ngerman, % für Umlaute, Silbentrennung etc.
+    a4paper, % Papierformat
+    oneside, % einseitiges Dokument
+    titlepage, % es wird eine Titelseite verwendet
+    parskip=half, % Abstand zwischen Absätzen (halbe Zeile)
+    headings=normal, % Größe der Überschriften verkleinern
+    listof=totoc, % Verzeichnisse im Inhaltsverzeichnis aufführen
+    bibliography=totoc, % Literaturverzeichnis im Inhaltsverzeichnis aufführen
+    index=totoc, % Index im Inhaltsverzeichnis aufführen
+    captions=tableheading, % Beschriftung von Tabellen unterhalb ausgeben
+    final % Status des Dokuments (final/draft)
+]{scrreprt}
+
+% UTF8 und T1 Fontencoding -----------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tikz} % Ensure TikZ/PGF is loaded after fontenc/inputenc
+
+\input{Preamble/Meta}
+\input{Preamble/Packages}
+\input{Preamble/Seitenstil}
+
+
+\begin{document}
+\include{Preamble/Silbentrennung}
+\include{Preamble/Befehle}
+
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+
+% Deckblatt und Abstract ohne Seitenzahl ---------------------------------------------------------------
+\include{Formalien/Deckblatt}
+
+% Seitennummerierung -----------------------------------------------------------------------------------
+%   Vor dem Hauptteil werden die Seiten in großen römischen Ziffern 
+%   nummeriert.
+% ------------------------------------------------------------------------------------------------------
+\pagenumbering{Roman}
+\tableofcontents{}
+
+
+
+% Abkürzungsverzeichnis --------------------------------------------------------------------------------
+\input{Inhalt/Glossar}
+
+% arabische Seitenzahlen im Hauptteil ------------------------------------------------------------------
+\clearpage{}
+\pagenumbering{arabic}
+
+% die Inhaltskapitel werden in "Inhalt.tex" inkludiert -------------------------------------------------
+\input{Preamble/Inhalt}
+
+% Literaturverzeichnis ---------------------------------------------------------------------------------
+%   Das Literaturverzeichnis wird aus der BibTeX-Datenbank "Bibliographie.bib"
+%   erstellt.
+% ------------------------------------------------------------------------------------------------------
+\bibliography{Literatur/Bibliographie} % Aufruf: bibtex Masterarbeit
+\bibliographystyle{natdin} % DIN-Stil des Literaturverzeichnisses
+
+
+% Restliche Verzeichnisse -> wenn diese leer sind, sollte das hier auskommentiert werden ------------------------------------------------------------------------------
+\listoffigures{} % Abbildungsverzeichnis
+\listoftables{} % Tabellenverzeichnis
+
+
+% Ehrenwörtliche Erklärung ----------------------------------------------------------------------------
+\include{Formalien/Erklaerung} 
+
+
+% Anhang -----------------------------------------------------------------------------------------------
+%   Die Inhalte des Anhangs werden analog zu den Kapiteln inkludiert.
+%   Dies geschieht in der Datei "Anhang.tex".
+% ------------------------------------------------------------------------------------------------------
+\appendix
+    % \clearpage{}
+    % \pagenumbering{roman}
+    \chapter{Anhang}
+    \label{sec:Anhang}
+    % Rand der Aufzählungen in Tabellen anpassen
+    \setdefaultleftmargin{1em}{}{}{}{}{}
+    \input{Inhalt/Anhang}
+
+\end{document}

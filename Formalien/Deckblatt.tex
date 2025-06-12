@@ -1,0 +1,64 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root =  Main.tex
+
+% Kopfbereich mit Logo
+\titlehead{%
+  % Verschiebt das Logo nach oben
+  \vspace*{-1,5cm}%
+  % Zentriert das Logo
+  \centering%
+  % Fügt das HWR-Logo ein (60% der Textbreite)
+  \includegraphics[width=0.6\linewidth]{Bilder/Logo_HWR.png}%
+  % Abstand nach dem Logo
+  \vspace{1,5cm}%  % Weniger Abstand nach dem Logo
+}
+
+% Art der Arbeit als Überschrift
+\vspace{10cm} 
+\subject{\art}
+
+% Erstellt den Titelbereich mit Rahmen
+\title{%
+  \vspace*{-1,5cm}%  % Verschiebt den gesamten Titelbereich nach oben
+  \normalfont\endgraf
+  \rule{\textwidth}{.4pt}\\\relax
+  \vspace{0.5cm}%  % Kleiner Abstand nach dem Zeilenumbruch
+  \begingroup
+    \centering
+    % Zeilenabstand auf 1.5
+    \linespread{1.5}\selectfont
+    % Titel in großer Schrift
+    \large\titel\\
+    % Untertitel in normaler Schrift (falls vorhanden)
+    % \normalsize\untertitel
+  \endgroup%  % Weniger Abstand vor der unteren Linie
+  \endgraf\rule{\textwidth}{.4pt}%
+}
+
+% Setzt das Datum und die Hochschule
+\date{\vspace{-1.5cm}%  % Reduziert den Abstand zum Titelbereich
+\normalsize vorgelegt am \datum\\
+an der \\ 
+Hochschule für Wirtschaft und Recht Berlin\vspace{5mm}}
+
+% Erstellt die Tabelle mit den Informationen
+\publishers{%
+  \begin{tabular}{l l}
+    % Persönliche Informationen
+    \textbf{\normalsize{Von: }} & \normalsize{\autor} \\
+    \textbf{\normalsize{Fachrichtung:}} & \normalsize{\fachrichtung} \\
+    \textbf{\normalsize{Studienjahrgang:}} & \normalsize{\studienjahrgang} \\
+    \textbf{\normalsize{Semester:}} & \normalsize{\semester} \\
+    \textbf{\normalsize{Ausbildungsbetrieb:}} & \normalsize{\ausbildungsbetrieb} \\
+    % Betreuer-Informationen
+    \textbf{\normalsize{Betreuender Prüfer:}} & \normalsize{\erstgutachter} \\
+    \textbf{\normalsize{Betreuer Betrieb:}} & \normalsize{\zweitgutachter} \\
+    % Unterschriftszeile
+    \textbf{\normalsize{Unterschrift Betreuer: }} & \underline{\hspace{3cm}} \\
+  \end{tabular}
+}
+
+% Keine Seitenzahl auf dem Deckblatt
+\pagestyle{empty}
+% Erstellt das Deckblatt
+\maketitle
