@@ -1,0 +1,56 @@
+\glsdefs@newdocentry{rup}%
+{%
+name={\acronymfont {\glsentryshort {rup}}},%
+sort={RUP},%
+type={acronym},%
+first={RUP},%
+firstplural={RUPs},%
+text={RUP},%
+plural={RUPs},%
+description={Rational Unified Process},%
+descriptionplural={Rational Unified Process},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Rational Unified Process},%
+longplural={Rational Unified Processs},%
+short={RUP},%
+shortplural={RUPs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{ukw}%
+{%
+name={\acronymfont {\glsentryshort {ukw}}},%
+sort={UKW},%
+type={acronym},%
+first={UKW},%
+firstplural={UKWs},%
+text={UKW},%
+plural={UKWs},%
+description={Ultrakurzwelle -- Synonym für UKW-Rundfunk im Bereich 87,5 bis 108 MHz des VHF-Bandes II},%
+descriptionplural={Ultrakurzwelle -- Synonym für UKW-Rundfunk im Bereich 87,5 bis 108 MHz des VHF-Bandes II},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Ultrakurzwelle -- Synonym für UKW-Rundfunk im Bereich 87,5 bis 108 MHz des VHF-Bandes II},%
+longplural={Ultrakurzwelle -- Synonym für UKW-Rundfunk im Bereich 87,5 bis 108 MHz des VHF-Bandes IIs},%
+short={UKW},%
+shortplural={UKWs},%
+counter={page},%
+parent={},%
+%
+}%
+

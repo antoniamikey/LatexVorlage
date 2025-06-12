@@ -1,5 +1,5 @@
 % !TEX encoding = UTF-8 Unicode
-% !TEX root =  Bachelorarbeit.tex
+% !TEX root =  Main.tex
 % Eigene Befehle und typographische Auszeichnungen für diese
 
 
@@ -15,19 +15,33 @@
 \newcommand{\bzw}{bzw.\ }
 \newcommand{\evtl}{evtl.\ }
 
+%Referenziert eine Abbildung mit Label 
 \newcommand{\Abbildung}[1]{Abbildung~\ref{fig:#1}}
 
 \newcommand{\bs}{$\backslash$}
 
 
-% erzeugt ein Listenelement mit fetter Überschrift ------------------------------------------------------
-\newcommand{\itemd}[2]{\item{\textbf{#1}}\\{#2}}
+% Hilfsbefehle für Standardwerte
+\newcommand{\maybeAuthor}[1]{%
+  \ifblank{\citeauthor{#1}}{o.\,A.}{\citeauthor{#1}}%
+}
+\newcommand{\maybeYear}[1]{%
+  \ifblank{\citeyear{#1}}{o.\,J.}{\citeyear{#1}}%
+}
 
+% Zitat: [Meier 2020, 42] oder [o.A. o.J., 42] oder [Meier 2020]
+\newcommand{\ZitatSeite}[2]{%
+  [\maybeAuthor{#1}~\maybeYear{#1}%
+  \ifstrempty{#2}{}{, #2}%
+  ]%
+}
 
-% einige Befehle zum Zitieren ---------------------------------------------------------------------------
-\newcommand{\Zitat}[2][\empty]{\ifthenelse{\equal{#1}{\empty}}{\citep{#2}}{\citep[#1]{#2}}}
-\newcommand{\ZitatSpezialA}[3]{\citep[#1][#2]{#3}}
-\newcommand{\ZitatSpezialB}[2]{\citep[#1][]{#2}}
+% Zitat mit Vgl.: [Vgl. Meier 2020, S. 43] oder [Vgl. o.A. o.J., S. 43]
+\newcommand{\VglZitatSeite}[2]{%
+  [Vgl.\ \maybeAuthor{#1}~\maybeYear{#1}%
+  \ifstrempty{#2}{}{, S.~#2}%
+  ]%
+}
 
 
 % zum Ausgeben von Autoren
@@ -45,11 +59,11 @@
 \newcommand{\FachbegriffSpezialB}[5]{\textit{#5}\footnote{#3}\label{fn:#1}\nomenclature{#4}{#2. Siehe auch Fu{\ss}zeile auf Seite~\pageref{fn:#1}.}}
 
 
-% Beträge mit Währung -----------------------------------------------------------------------------------
+% Beträge mit Währung, z.B.: \Betrag[euro]{100} oder \Betrag[dollar]{50} -----------------------------------------------------------------------------------
 \newcommand{\Betrag}[2][general]{#2\,\ifthenelse{\equal{#1}{dollar}}{\$}{}\ifthenelse{\equal{#1}{euro}}{€}{}\ifthenelse{\equal{#1}{yen}}{¥}{}\ifthenelse{\equal{#1}{cent}}{¢}{}\ifthenelse{\equal{#1}{pound}}{£}{}\ifthenelse{\equal{#1}{peso}}{₱}{}\ifthenelse{\equal{#1}{baht}}{฿}{}\ifthenelse{\equal{#1}{franc}}{₣}{}\ifthenelse{\equal{#1}{lira}}{₤}{}\ifthenelse{\equal{#1}{drachma}}{₯}{}\ifthenelse{\equal{#1}{pfennig}}{₰}{}\ifthenelse{\equal{#1}{general}}{¤}{}}
 
 
-% Sonstiges ---------------------------------------------------------------------------------------------
+% Sonstiges, z.B.: \Eingabe{ls -l}; \Code{for i in range(10):}; \Datei{main.py} ---------------------------------------------------------------------------------------------
 \newcommand{\Eingabe}[1]{\texttt{#1}}
 \newcommand{\Code}[1]{\texttt{#1}}
 \newcommand{\Datei}[1]{\texttt{#1}}
