@@ -1,176 +1,223 @@
-# LaTeX Vorlage für wissenschaftliche Arbeiten
 
-Diese Vorlage ist für wissenschaftliche Arbeiten (Bachelor-, Master-, Diplomarbeiten) konzipiert. Zur Anwendung muss vorher LaTeX auf dem PC installiert werden und die Extension LaTeX Workshop installiert werden. 
+# 📘 LaTeX-Vorlage für wissenschaftliche Arbeiten
 
-## Wichtige LaTeX-Befehle und ihre Verwendung
+Diese Vorlage richtet sich an Studierende, die wissenschaftliche Arbeiten wie Bachelor-, Master- oder Diplomarbeiten verfassen. Sie basiert auf LaTeX und nutzt Erweiterungen für saubere Struktur, Zitation und Typographie.
 
-### Textformatierung und Typographie
+> 💡 **Voraussetzung:** Installiertes LaTeX-System (z. B. TeX Live oder MikTeX) und ein Editor mit der Extension **LaTeX Workshop** (z. B. Visual Studio Code).
+
+---
+
+## 📑 Gliederungsebenen
 
 ```latex
-% Schriftart temporär ändern
-\changefont{cmss}{sbc}{n}  % Font-Familie, Serie, Form
-
-% Neue Begriffe hervorheben
-\NeuerBegriff{Cloud Computing}  % Fettdruck
-
-% Fachbegriffe mit optionaler Erklärung
-\Fachbegriff{Algorithmus}  % Kursiv
-\Fachbegriff[Systematische Handlungsvorschrift]{Algorithmus}  % Mit Fußnote + Glossareintrag
+\chapter{Kapitel}           % 1. Ebene
+\section{Abschnitt}         % 2. Ebene
+\subsection{Unterabschnitt} % 3. Ebene
+\subsubsection{Titel}       % 4. Ebene
+\paragraph{Absatz}          % 5. Ebene (ohne Nummer)
+\subparagraph{Unterabsatz}  % 6. Ebene (ohne Nummer)
 ```
 
-### Abkürzungen mit korrektem Leerraum
+---
+
+## 🔗 Labels & Referenzen
+
 ```latex
-\zB     % z. B. 
-\ua     % u. a. 
-\dahe   % d. h. 
-\Vgl    % Vgl. 
-\bzw    % bzw. 
-\evtl   % evtl. 
+% Kapitel-Label
+\chapter{Einleitung}
+\label{chap:einleitung}
+
+% Abschnitts-Label
+\section{Methodik}
+\label{sec:methodik}
+
+% Empfohlene Präfixe:
+% chap:, sec:, fig:, tab:, eq:, lst:
+
+% Referenzen:
+Siehe Kapitel~\ref{chap:einleitung}
+In Abschnitt~\ref{sec:methodik}
+Wie in Abbildung~\ref{fig:diagramm}
+Gemäß Tabelle~\ref{tab:ergebnisse}
+Laut Gleichung~\ref{eq:formel}
+Siehe Seite~\pageref{sec:methodik}
+
+% Mehrere Referenzen:
+In den Kapiteln~\ref{chap:einleitung} und~\ref{chap:methodik}
+
+% Tipp: Nutze ~ vor \ref/\pageref für geschützte Leerzeichen
 ```
 
-### Zitationen und Quellenangaben
+---
+
+## 🛠 Wichtige LaTeX-Befehle
+
+### ✍️ Textformatierung
+
 ```latex
-% Autor im Text nennen
-\Autor{mustermann2023}  % → "MUSTERMANN"
+\changefont{cmss}{sbc}{n}    % Schrift ändern
+\NeuerBegriff{Cloud Computing}        % Fett
+\Fachbegriff{Algorithmus}             % Kursiv
+\Fachbegriff[Erklärung]{Algorithmus}  % Mit Glossar
+```
 
-% Standardzitat mit Seitenzahl
-\ZitatSeite{mustermann2023}{42}  % → [Mustermann 2023, 42]
+### 🔤 Abkürzungen
 
-% Vergleichszitat
-\VglZitatSeite{mustermann2023}{15}  % → [Vgl. Mustermann 2023, S. 15]
+```latex
+\zB     % z. B.
+\ua     % u. a.
+\dahe   % d. h.
+\Vgl    % Vgl.
+\bzw    % bzw.
+\evtl   % evtl.
+```
 
-% BibTeX-Eintrag Beispiel
+---
+
+## 📚 Zitation und Literatur
+
+```latex
+% Zitate im Text
+\Autor{mustermann2023}
+\Zitat{mustermann2023}{42}
+\VglZitat{mustermann2023}{15}
+
+% Beispiel BibTeX-Eintrag
 @book{mustermann2023,
-    author    = {Mustermann, Max},
-    title     = {Titel des Buchs},
-    year      = {2023},
-    publisher = {Verlag},
-    address   = {Stadt}
+  author    = {Mustermann, Max},
+  title     = {Titel des Buchs},
+  year      = {2023},
+  publisher = {Verlag},
+  address   = {Stadt}
 }
 ```
 
-### Abbildungen und Referenzen
+---
+
+## 🖼 Abbildungen
+
 ```latex
-% Abbildung einfügen
 \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Bilder/beispiel.png}
-    \caption{Beschreibung der Abbildung}
-    \label{fig:beispiel}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Bilder/beispiel.png}
+  \caption{Beschreibung der Abbildung}
+  \label{fig:beispiel}
 \end{figure}
 
-% Auf Abbildung verweisen
-\Abbildung{beispiel}  % → "Abbildung 1"
+% Referenz:
+\Abbildung{beispiel}
 ```
 
-### Code und technische Elemente
-```latex
-% Code-Elemente
-\Code{for i in range(10)}  % Monospace-Schrift
-\Eingabe{ls -l}           % Konsolenbefehle
-\Datei{main.py}          % Dateinamen
+---
 
-% Technische Begriffe
-\Datentyp{Integer}       % Sans-Serif
-\XMLElement{body}        % XML-Elemente
-\Webservice{REST-API}    % Webservice-Namen
+## 💻 Code & Technik
+
+```latex
+\Code{for i in range(10)}
+\Eingabe{ls -l}
+\Datei{main.py}
+\Datentyp{Integer}
+\XMLElement{body}
+\Webservice{REST-API}
 ```
 
-### Währungen und Beträge
+---
+
+## 💶 Währungen
+
 ```latex
-\Betrag[euro]{42}    % → 42 €
-\Betrag[dollar]{99}  % → 99 $
-\Betrag[pound]{50}   % → 50 £
+\Betrag[euro]{42}     % → 42 €
+\Betrag[dollar]{99}   % → 99 $
+\Betrag[pound]{50}    % → 50 £
 ```
 
-### Tabellen
-```latex
-% Rechtsbündige Spalte mit definierter Breite
-\begin{tabular}{w{5cm}}
-    Rechtsbündig
-\end{tabular}
+---
 
-% Linksbündige Spalte mit automatischer Breite
-\begin{tabularx}{\textwidth}{y{1.0}}
-    Linksbündig mit Umbruch
-\end{tabularx}
+## 📊 Tabellen
+
+```latex
+\begin{tabular}{w{5cm}} Rechtsbündig \end{tabular}
+
+\begin{tabularx}{\textwidth}{y{1.0}} Linksbündig mit Umbruch \end{tabularx}
 ```
 
-## Zusätzliche nützliche Befehle (nicht in der Vorlage enthalten)
+---
 
-### Mathematische Formeln
+## ➗ Mathematische Formeln
+
 ```latex
-% Inline-Mathematik
+% Inline
 $x = y^2$
 
-% Abgesetzte Formel mit Nummerierung
+% Mit Nummer
 \begin{equation}
-    E = mc^2
-    \label{eq:einstein}
+  E = mc^2
+  \label{eq:einstein}
 \end{equation}
 
-% Mehrzeilige Formeln
+% Mehrzeilig
 \begin{align}
-    y &= mx + b \\
-    m &= \frac{\Delta y}{\Delta x}
+  y &= mx + b \\
+  m &= \frac{\Delta y}{\Delta x}
 \end{align}
 ```
 
-### Listen und Aufzählungen
+---
+
+## 📌 Listen & Fußnoten
+
 ```latex
-% Verschachtelte Liste
 \begin{itemize}
-    \item Hauptpunkt
-    \begin{enumerate}
-        \item Unterpunkt 1
-        \item Unterpunkt 2
-    \end{enumerate}
+  \item Punkt
+  \begin{enumerate}
+    \item Unterpunkt
+  \end{enumerate}
 \end{itemize}
 
-% Beschreibungsliste
 \begin{description}
-    \item[Begriff] Erklärung
-    \item[Konzept] Definition
+  \item[Begriff] Erklärung
 \end{description}
+
+Text\footnote{Fußnote.}
 ```
 
-### Fußnoten und Querverweise
+---
+
+## 🧱 Hervorhebungen
+
 ```latex
-% Fußnote
-Ein wichtiger Punkt\footnote{Weitere Details hier.}
-
-% Querverweis auf Kapitel
-Siehe Kapitel~\ref{sec:methodik}
-
-% Seitenverweis
-Siehe Seite~\pageref{sec:methodik}
-```
-
-### Textboxen und Hervorhebungen
-```latex
-% Wichtige Information
 \begin{important}
-    Kritische Information
+  Kritische Information
 \end{important}
 
-% Randnotiz
 \marginpar{Notiz am Rand}
 ```
 
-## Kompilierung
+---
 
-Um die Arbeit mit allen Referenzen und dem Literaturverzeichnis zu erstellen, sind folgende Schritte nötig:
+## ⚙️ Kompilierung
 
-1. `pdflatex Main.tex`
-2. `bibtex Main`
-3. `pdflatex Main.tex`
-4. `pdflatex Main.tex`
+Um ein vollständiges PDF mit Literaturverzeichnis zu erzeugen:
 
-## Tipps
+```bash
+pdflatex Main.tex
+bibtex Main
+pdflatex Main.tex
+pdflatex Main.tex
+```
 
-- Verwenden Sie `%` für Kommentare
-- Nutzen Sie `~` für geschützte Leerzeichen (z.B. bei Referenzen)
-- Setzen Sie Anführungszeichen mit \`\` und '' (öffnend/schließend)
-- Verwenden Sie `\label` und `\ref` für Querverweise
-- Nutzen Sie `\index{Stichwort}` für den Index
-- Setzen Sie `\clearpage` für erzwungene Seitenumbrüche
+---
+
+## 🧠 Tipps
+
+- `%` für Kommentare verwenden
+- `~` für geschützte Leerzeichen (z. B. bei Referenzen)
+- Anführungen: ``Text'' für deutschsprachige Zitate
+- `\label` und `\ref` konsequent nutzen
+- `\clearpage` für Seitenumbruch
+- `\index{Begriff}` für Indexeintrag
+
+---
+
+**Viel Erfolg bei deiner Arbeit!** 🎓  
+Für Fragen oder Erweiterungen – gerne Issues oder Pull Requests öffnen.
