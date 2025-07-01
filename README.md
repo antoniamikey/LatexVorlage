@@ -1,3 +1,4 @@
+
 # 📘 LaTeX-Vorlage für wissenschaftliche Arbeiten
 
 Diese Vorlage richtet sich an Studierende, die wissenschaftliche Arbeiten wie Bachelor-, Master- oder Diplomarbeiten verfassen. Sie basiert auf LaTeX und nutzt Erweiterungen für saubere Struktur, Zitation und Typographie.

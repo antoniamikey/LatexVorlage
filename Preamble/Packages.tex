@@ -52,6 +52,35 @@
 \usepackage{rotating}        % Rotation von Elementen
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HYPERLINKS UND PDF-EINSTELLUNGEN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% URL-Formatierung
+\usepackage{url}
+
+% PDF-Optionen und Hyperlinks
+\usepackage[
+    bookmarks,
+    bookmarksopen=true,
+    colorlinks=true,
+    linkcolor=black,     % Interne Links (wie im Inhaltsverzeichnis) in Schwarz
+    anchorcolor=black,
+    citecolor=blue,
+    filecolor=magenta,
+    menucolor=black,
+    urlcolor=cyan,
+    backref,
+    plainpages=false,
+    pdfpagelabels,
+    hypertexnames=false,
+    linktocpage,
+    pdftitle={\titel\untertitel},
+    pdfauthor={\autor},
+    pdfcreator={\creator},
+    pdfsubject={\titel\untertitel},
+    pdfkeywords={\keywords}
+]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % VERZEICHNISSE UND REFERENZEN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Glossar und Abkürzungen
@@ -176,35 +205,6 @@
 \lstdefinelanguage[Fluid]{HTML}[]{HTML} {
     morekeywords={if, for, each, as, condition, controller, arguments, image, link, action, class}
 }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% HYPERLINKS UND PDF-EINSTELLUNGEN
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% URL-Formatierung
-\usepackage{url}
-
-% PDF-Optionen und Hyperlinks
-\usepackage[
-    bookmarks,
-    bookmarksopen=true,
-    colorlinks=true,
-    linkcolor=black,     % Interne Links (wie im Inhaltsverzeichnis) in Schwarz
-    anchorcolor=black,
-    citecolor=blue,
-    filecolor=magenta,
-    menucolor=black,
-    urlcolor=cyan,
-    backref,
-    plainpages=false,
-    pdfpagelabels,
-    hypertexnames=false,
-    linktocpage,
-    pdftitle={\titel\untertitel},
-    pdfauthor={\autor},
-    pdfcreator={\creator},
-    pdfsubject={\titel\untertitel},
-    pdfkeywords={\keywords}
-]{hyperref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ZUSÄTZLICHE FUNKTIONALITÄT
