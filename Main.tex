@@ -30,11 +30,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{tikz} % Ensure TikZ/PGF is loaded after fontenc/inputenc
+\usepackage{array}
 
 \input{Preamble/Meta}
 \input{Preamble/Packages}
 \input{Preamble/Seitenstil}
 
+\author{\autor} % <-- Diesen Befehl ergänzen
 
 \begin{document}
 \include{Preamble/Silbentrennung}
@@ -92,8 +94,7 @@
 \appendix
     % \clearpage{}
     % \pagenumbering{roman}
-    \chapter{Anhang}
-    \label{sec:Anhang}
+    \chapter{Anhang}\label{sec:Anhang}
     % Rand der Aufzählungen in Tabellen anpassen
     \setdefaultleftmargin{1em}{}{}{}{}{}
     \input{Inhalt/Anhang}
