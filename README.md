@@ -297,6 +297,7 @@ pdflatex Main.tex
 - `\label` und `\ref` konsequent nutzen
 - `\clearpage` für Seitenumbruch
 - `\index{Begriff}` für Indexeintrag
+- `glqq`für " und `grqq`für „
 
 ---
 
