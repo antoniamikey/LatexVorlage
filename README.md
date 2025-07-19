@@ -5,6 +5,84 @@ Diese Vorlage richtet sich an Studierende, die wissenschaftliche Arbeiten wie Ba
 
 > 💡 **Voraussetzung:** Installiertes LaTeX-System (z. B. TeX Live oder MikTeX) und ein Editor mit der Extension **LaTeX Workshop** (z. B. Visual Studio Code).
 
+## Vorabeinstellungen
+Bei dem Build Prozess der PDF entstehen viele Dateien, die im Anschluss nicht mehr benötigt werden. Um diese danach wieder loszuwerden, kann folgendes in die settings.json eingefügt werden: 
+
+{
+    "java.configuration.runtimes": [
+  {
+    "name": "JavaSE-23",
+    "path": "/opt/homebrew/Cellar/openjdk/23.0.1/libexec/openjdk.jdk/Contents/Home",
+    "default": true
+  },
+],
+    "workbench.colorTheme": "Quiet Light",
+    "jdk.jdkhome": "/Users/antonia/Library/Java/JavaVirtualMachines/openjdk-23.0.1/Contents/Home",
+    "redhat.telemetry.enabled": false, 
+    "latex-workshop.formatting.latexindent.path": "/Library/TeX/texbin/latexindent",
+    "latex-workshop.kpsewhich.path": "/Library/TeX/texbin/kpsewhich",
+    "latex-workshop.synctex.path": "/Library/TeX/texbin/synctex",
+    "latex-workshop.linting.chktex.exec.path": "/Library/TeX/texbin/chktex",
+    "editor.wordWrapColumn": 1,
+    "editor.wordWrap": "on",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "explorer.confirmDelete": false,
+    "latex-workshop.latex.autoClean.run": "onBuilt",
+    "latex-workshop.latex.clean.method": "glob",
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.glsdefs",
+    "*.fls",
+    "*.log",
+    "*.fdb_latexmk",
+    "*.snm",
+    "*.synctex(busy)",
+    "*.synctex.gz(busy)",
+    "*.nav",
+    "*.vrb",
+    "*.xdv",
+    "*.nls",
+    "*.ilg",
+    "*.ist",
+    "*.bcf",
+    "*.run.xml",
+    "*.lol",
+    "*.synctex.gz(busy)",
+    "*.synctex.gz"
+    ],
+    "files.exclude": {
+        "**/*.aux": true,
+        "**/*.log": true,
+        "**/*.toc": true,
+        "**/*.out": true,
+        "**/*.bbl": true,
+        "**/*.blg": true,
+        "**/*.synctex.gz": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.fls": true,
+        "**/*.nav": true,
+        "**/*.snm": true,
+        "**/*.vrb": true
+    },
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "docker.extension.enableComposeLanguageServer": false
+}
+
+
 ---
 
 ## 📑 Gliederungsebenen
