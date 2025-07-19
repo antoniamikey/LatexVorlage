@@ -7,7 +7,7 @@ Diese Vorlage richtet sich an Studierende, die wissenschaftliche Arbeiten wie Ba
 
 ## Vorabeinstellungen
 Bei dem Build Prozess der PDF entstehen viele Dateien, die im Anschluss nicht mehr benötigt werden. Um diese danach wieder loszuwerden, kann folgendes in die settings.json eingefügt werden: 
-
+```json
 {
     "java.configuration.runtimes": [
   {
@@ -81,7 +81,7 @@ Bei dem Build Prozess der PDF entstehen viele Dateien, die im Anschluss nicht me
     "latex-workshop.latex.autoBuild.run": "onSave",
     "docker.extension.enableComposeLanguageServer": false
 }
-
+```
 
 ---
 
@@ -154,11 +154,14 @@ In den Kapiteln~\ref{chap:einleitung} und~\ref{chap:methodik}
 
 ## 📚 Zitation und Literatur
 
+Die Zitation erfolgt in LaTeX mithilfe von Bibtex Dateien. Mithilfe von Better Bibtex kann der Prozess noch vereinfacht werden. Die Verwendung im text erfolgt durch die folgenden Befehle. Diese Befehle dienen der Inline Zitation. In der ersten Klammer wird der Bibtexkey genutzt, um das Buch zu referenzieren. In der zweiten Klammer die Seitenzahl. 
+
 ```latex
 % Zitate im Text
 \Autor{mustermann2023}
-\Zitat{mustermann2023}{42}
-\VglZitat{mustermann2023}{15}
+\Zitat{mustermann2023}{42} % direktes Zitat
+\VglZitat{mustermann2023}{15} % indirektes Zitat
+\NarrativZitat{mustermann2023}{13} % Narratives Zitat
 
 % Beispiel BibTeX-Eintrag
 @book{mustermann2023,

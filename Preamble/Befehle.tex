@@ -31,7 +31,7 @@
 % Zitierformate
 \newcommand{\Zitat}[2]{%
   [\maybeAuthor{#1}~\maybeYear{#1}%
-  \ifstrempty{#2}{}{, #2}%
+  \ifstrempty{#2}{}{, S.~#2}%
   ]%
 }
 \newcommand{\VglZitat}[2]{%
@@ -39,6 +39,14 @@
   \ifstrempty{#2}{}{, S.~#2}%
   ]%
 }
+% Nur Jahreszahl und Seite
+\newcommand{\NarrativZitat}[2]{%
+  [\maybeYear{#1}%
+  \ifstrempty{#2}{}{, S.~#2}%
+  ]%
+}
+
+
 \newcommand{\AutorName}[1]{\textsc{#1}}
 \newcommand{\Autor}[1]{\AutorName{\citeauthor{#1}}}
 
