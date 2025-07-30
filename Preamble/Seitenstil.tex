@@ -41,4 +41,9 @@
 % Fußnoten fortlaufend durchnummerieren
 \counterwithout{footnote}{chapter}
 
+% Abstand nach Überschriften
+\RedeclareSectionCommand[beforeskip=10pt, afterskip=10pt]{chapter}
+\RedeclareSectionCommand[beforeskip=10pt, afterskip=5pt]{section}
 
+% Abstand zwischen Kopfzeile und Text
+\setlength{\headsep}{15pt} % Standard ist oft 20pt, kleiner machen für weniger Abstand
