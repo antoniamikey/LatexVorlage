@@ -68,7 +68,6 @@
     filecolor=magenta,
     menucolor=black,
     urlcolor=cyan,
-    backref,
     plainpages=false,
     pdfpagelabels,
     hypertexnames=false,
@@ -85,13 +84,42 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Glossar und Abkürzungen
 \usepackage[acronym,nomain,nopostdot,nonumberlist]{glossaries}
-\makeglossaries
+\makeglossaries%
 \setglossarystyle{list}
 \renewcommand*{\glsnamefont}[1]{\textrm{#1}}
 
 % Literaturverzeichnis
-\usepackage[square,numbers,sort&compress]{natbib}
+% \usepackage[square,numbers,sort&compress]{natbib}
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    language=ngerman,
+    backref=true,
+    hyperref=true
+]{biblatex}
 
+% To set square brackets for parencite, use:
+\renewcommand*{\mkbibparens}[1]{\mkbibbrackets{#1}}
+\DeclareRobustCommand{\addcomma}{,}
+\DeclareLabelalphaTemplate{
+  \labelelement{
+    \field[strwidth=3,strside=left]{labelname}
+  }
+  \labelelement{
+    \field[strwidth=2,strside=right]{year}
+  }
+}
+\DeclareFieldFormat{labelyear}{%
+  \iffieldundef{year}
+    {o.\,J.} % ohne Jahr
+    {#1}
+}
+\DeclareFieldFormat{labelname}{%
+  \iffieldundef{name}
+    {o.\,A.} % ohne Autor
+    {#1}
+}
+\addbibresource{Literatur/Bibliographie.bib}
 % Index
 \usepackage{makeidx}
 \usepackage{etoolbox}

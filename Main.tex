@@ -30,11 +30,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{tikz} % Ensure TikZ/PGF is loaded after fontenc/inputenc
+\usepackage{array}
+
 
 \input{Preamble/Meta}
 \input{Preamble/Packages}
 \input{Preamble/Seitenstil}
-
 
 \begin{document}
 \include{Preamble/Silbentrennung}
@@ -64,6 +65,7 @@
 % arabische Seitenzahlen im Hauptteil ------------------------------------------------------------------
 \clearpage{}
 \pagenumbering{arabic}
+\pagestyle{scrheadings}
 
 % die Inhaltskapitel werden in "Inhalt.tex" inkludiert -------------------------------------------------
 \input{Preamble/Inhalt}
@@ -72,9 +74,9 @@
 %   Das Literaturverzeichnis wird aus der BibTeX-Datenbank "Bibliographie.bib"
 %   erstellt.
 % ------------------------------------------------------------------------------------------------------
-\bibliography{Literatur/Bibliographie} % Aufruf: bibtex Masterarbeit
-\bibliographystyle{natdin} % DIN-Stil des Literaturverzeichnisses
-
+% \bibliography{Literatur/Bibliographie} % Aufruf: bibtex Masterarbeit
+% \bibliographystyle{natdin} % DIN-Stil des Literaturverzeichnisses
+\printbibliography
 
 % Restliche Verzeichnisse -> wenn diese leer sind, sollte das hier auskommentiert werden ------------------------------------------------------------------------------
 \listoffigures{} % Abbildungsverzeichnis
@@ -92,8 +94,7 @@
 \appendix
     % \clearpage{}
     % \pagenumbering{roman}
-    \chapter{Anhang}
-    \label{sec:Anhang}
+    \chapter{Anhang}\label{sec:Anhang}
     % Rand der Aufzählungen in Tabellen anpassen
     \setdefaultleftmargin{1em}{}{}{}{}{}
     \input{Inhalt/Anhang}

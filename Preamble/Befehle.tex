@@ -21,28 +21,37 @@
 \newcommand{\evtl}{evtl.\ }
 
 % Hilfsbefehle für Zitate
-\newcommand{\maybeAuthor}[1]{%
-  \ifblank{\citeauthor{#1}}{o.\,A.}{\citeauthor{#1}}%
-}
-\newcommand{\maybeYear}[1]{%
-  \ifblank{\citeyear{#1}}{o.\,J.}{\citeyear{#1}}%
-}
+% \newcommand{\maybeAuthor}[1]{%
+%   \ifblank{\citeauthor{#1}}{o.\,A.}{\citeauthor{#1}}%
+% }
+% \newcommand{\maybeYear}[1]{%
+%   \ifblank{\citeyear{#1}}{o.\,J.}{\citeyear{#1}}%
+% }
+% Autor mit Fallback auf o. A.
 
 % Zitierformate
+% Damit das Komma nicht verschluckt wird:
 \newcommand{\Zitat}[2]{%
-  [\maybeAuthor{#1}~\maybeYear{#1}%
-  \ifstrempty{#2}{}{, S.~#2}%
-  ]%
+  \ifstrempty{#2}
+    {\parencite{#1}}%
+    {\begingroup
+      \def\postnotedelim{,\space}%
+      \parencite[][S.~#2]{#1}%
+     \endgroup}%
 }
+
 \newcommand{\VglZitat}[2]{%
-  [Vgl.\ \maybeAuthor{#1}~\maybeYear{#1}%
-  \ifstrempty{#2}{}{, S.~#2}%
-  ]%
+  \ifstrempty{#2}
+    {\parencite[Vgl.\ ][]{#1}}%
+    {\begingroup
+      \def\postnotedelim{,\space}%
+      \parencite[Vgl.\ ][S.~#2]{#1}%
+     \endgroup}%
 }
+
 \newcommand{\NarrativZitat}[2]{%
-  [\maybeYear{#1}%
-  \ifstrempty{#2}{}{, S.~#2}%
-  ]%
+  \citeauthor{#1} (\citeyear{#1}%
+  \ifstrempty{#2}{}{, S.~#2})%
 }
 \newcommand{\AutorName}[1]{\textsc{#1}}
 \newcommand{\Autor}[1]{\AutorName{\citeauthor{#1}}}
@@ -83,5 +92,5 @@
 }
 
 % Spezielle Spaltentypen
-\newcolumntype{w}[1]{>{\raggedleft\hspace{0pt}}p{#1}}
+\newcolumntype{x}[1]{>{\raggedleft\hspace{0pt}}p{#1}}
 \newcolumntype{y}[1]{>{\RaggedRight\arraybackslash\hsize=#1\hsize}X}
