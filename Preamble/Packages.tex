@@ -90,13 +90,15 @@
 
 % Literaturverzeichnis
 % \usepackage[square,numbers,sort&compress]{natbib}
+\usepackage{csquotes} % wurde im Log empfohlen
 \usepackage[
     backend=biber,
     style=authoryear,
     language=ngerman,
-    backref=true,
-    hyperref=true
+    backref=true
 ]{biblatex}
+\addbibresource{Literatur/Bibliographie.bib}
+
 
 % To set square brackets for parencite, use:
 \renewcommand*{\mkbibparens}[1]{\mkbibbrackets{#1}}

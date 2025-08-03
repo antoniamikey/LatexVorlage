@@ -1,0 +1,52 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX root =  ../Main.tex
+
+\chapter{Prototyp}\label{cha:prototyp}
+Die Webanwendung zur Antragserstellung ist zum internen Gebrauch für die Mitarbeitenden des Sozialbüros des \gls{asta} der \gls{hwr} sowie zum externen Gebrauch für die Studierenden der \gls{hwr} gedacht. Die Studierenden sollen die Möglichkeit haben, ihre Anträge unkompliziert über ein Webformular einzureichen. Gelichzeitig führt das dazu, dass den Mitarbeitenden des Sozialbüros Aufgaben abgenommen werden, wie das Versehen der Dokumente und Antragsdaten mit einer Prozessnummer zu versehen oder die Dokumente händisch in ein Dateisystem hochzuladen. Die Webapplikation soll von einem Desktop-Rechner aus bedient werden können. Die Lösung besteht aus zwei Frontend Lösungen. Eine davon stellt das Antragsformular auf der Website des \gls{asta} dar, die zweite soll eine Webapplikation zur Bearbeitung der Anträge sein. 
+
+\section{Antragsformular}\label{sec:antragsformular}
+Das Antragsformular soll die folgenden Pflichtfelder beinhalten: 
+
+\begin{itemize}
+    \item Vorname
+    \item Nachname
+    \item Matrikelnummer
+    \item Hochschul-E-Mail-Adresse
+    \item Straße
+    \item Hausnummer
+    \item Postleitzahl 
+    \item Ort 
+    \item zu beantragendes Semester
+    \item Erstattungsgrund
+    \item IBAN 
+    \item BIC 
+    \item Bankname
+    \item Zustimmung zu den AGBs 
+    \item Zustimmung zur Verarbeitung der personenbezogenen Daten
+\end{itemize}
+
+Die Hoschul-E-Mail-Adresse soll anhand der Domain auf ihre Richtigkeit überprüft werden. Ebenso sollen die IBAN als auch die BIC auf ihre Korrektheit überprüft werden. Zusätzlich zu den Pflichtfeldern gibt es ein Upload-Feld, um notwendige Nachweise hochzuladen. Bei einem von dem/der Studierenden abweichenden Kontoinhaber, muss das Kästchen unter den Angabefeldern zur Bankverbindung angekreuzt werden und eine schriftliche Bestätigung durch den/die Kontoinhabende:n hochgeladen werden. Abbildung~\ref{fig:antragsformular} zeigt eine mögliche Visualisierung des Antragsformulars.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Bilder/Antragsformular.png}
+  \caption{User Interface des Antragsformulars}\label{fig:antragsformular}
+\end{figure}
+
+\section{Bearbeitungsportal}
+Das Bearbeitungsportal für die Mirarbeitenden des Sozialbüros bildet den Kern der Lösung. Wenn der/die Nutzende die Webapplikation aufrufen, wird er/sie auf der ersten Seite aufgefordert, sich einzuloggen. Nach dem Login wird der/die Nutzende auf die Seite mit den zu bearbeitenden Anträgen weitergeleitet. Die eingegangenen Anträge sowie die Anträge, bei welchen Dokumente nachgefordert wurden, werden hier angezeigt. Abbildung~\ref{fig:aktuelleAnträge} zeigt eine mögliche Darstellung dieser Seite. Analog dazu soll es eine weitere Seite geben, auf welcher alle bewilligte, abgelehnten sowie archivierten Anträge angezeigt werden. Diese ist in Abbildung~\ref{fig:archivierteAnträge} dargestellt. 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Bilder/Aktuelle_Anträge.png}
+  \caption{User Interface des Bearbeitungsortals auf der Seite Aktuelle Anträge}\label{fig:aktuelleAnträge}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Bilder/Archivierte_Anträge.png}
+  \caption{User Interface des Bearbeitungsortals auf der Seite Archivierte Anträge}\label{fig:archivierteAnträge}
+\end{figure}
+
+\section{Datenmodell}\label{sec:datenmodell}
+
+\section{Technische Umsetzung}\label{sec:technischeUmsetzung}
+Die Webanwendung soll auf der Website des \gls{asta} erscheinen. Die aktuelle Website basiert auf Wordpress. 

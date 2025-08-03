@@ -50,9 +50,17 @@
 }
 
 \newcommand{\NarrativZitat}[2]{%
-  \citeauthor{#1} (\citeyear{#1}%
-  \ifstrempty{#2}{}{, S.~#2})%
+  \ifstrempty{#2}
+    {\textcite{#1}}%
+    {\begingroup
+      \def\postnotedelim{,\space}%
+      \textcite[][S.~#2]{#1}%
+     \endgroup}%
 }
+
+
+
+
 \newcommand{\AutorName}[1]{\textsc{#1}}
 \newcommand{\Autor}[1]{\AutorName{\citeauthor{#1}}}
 
