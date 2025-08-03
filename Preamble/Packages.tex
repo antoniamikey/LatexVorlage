@@ -36,6 +36,7 @@
 \usepackage{relsize}      % Relative Schriftgrößen
 \usepackage[normalem]{ulem}  % Bessere Unterstreichungen
 \usepackage{textcomp}     % Zusätzliche Symbole
+\usepackage{microtype}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ABBILDUNGEN UND GRAFIKEN
@@ -90,13 +91,15 @@
 
 % Literaturverzeichnis
 % \usepackage[square,numbers,sort&compress]{natbib}
+\usepackage{csquotes} % wurde im Log empfohlen
 \usepackage[
     backend=biber,
     style=authoryear,
     language=ngerman,
-    backref=true,
-    hyperref=true
+    backref=true
 ]{biblatex}
+\addbibresource{Literatur/Bibliographie.bib}
+
 
 % To set square brackets for parencite, use:
 \renewcommand*{\mkbibparens}[1]{\mkbibbrackets{#1}}
@@ -243,10 +246,10 @@
 % Textformatierung
 \usepackage{ragged2e}
 \usepackage{lscape}
-\usepackage{filecontents}
 
 % Hilfspakete
 \usepackage{ifthen}
 \usepackage{forloop}
 \usepackage{todonotes}
 \usepackage{xspace}
+\usepackage{datatool}

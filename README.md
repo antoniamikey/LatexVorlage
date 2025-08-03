@@ -79,7 +79,150 @@ Bei dem Build Prozess der PDF entstehen viele Dateien, die im Anschluss nicht me
         "**/*.vrb": true
     },
     "latex-workshop.latex.autoBuild.run": "onSave",
-    "docker.extension.enableComposeLanguageServer": false
+    "docker.extension.enableComposeLanguageServer": false,
+    
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "latex": false,
+        "text": false
+    },
+    
+    "github.copilot.inlineSuggest.enable": false,
+    "github.copilot.suggestionActions.enabled": true,
+    "github.copilot.experimentalFeatures.enabled": true,
+    "github.copilot.advancedInlineSuggestions.enabled": true,
+
+    "latex-workshop.latex.recipes": [    
+        {
+            "name": "pdflatex 📄 ➞ biber 🐿️ ➞ pdflatex × 2 📄📄",
+            "tools": [
+                "pdflatex",
+                "biber",
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "Compile Rnw files",
+            "tools": [
+                "rnw2tex",
+                "latexmk"
+            ]
+        },
+        {
+            "name": "Compile Jnw files",
+            "tools": [
+                "jnw2tex",
+                "latexmk"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": [
+                "--output-directory=%OUTDIR%",
+                "%DOCFILE%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "lualatexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "latexmk_rconly",
+            "command": "latexmk",
+            "args": [
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-output-directory=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "rnw2tex",
+            "command": "Rscript",
+            "args": [
+                "-e",
+                "knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
+            ],
+            "env": {}
+        },
+        {
+            "name": "jnw2tex",
+            "command": "julia",
+            "args": [
+                "-e",
+                "using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
+            ],
+            "env": {}
+        },
+        {
+            "name": "jnw2texmintex",
+            "command": "julia",
+            "args": [
+                "-e",
+                "using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
+            ],
+            "env": {}
+        },
+        {
+            "name": "tectonic",
+            "command": "tectonic",
+            "args": [
+                "--synctex",
+                "--keep-logs",
+                "%DOC%.tex"
+            ],
+            "env": {}
+        }
+    ]
+
 }
 ```
 
@@ -134,9 +277,9 @@ In den Kapiteln~\ref{chap:einleitung} und~\ref{chap:methodik}
 
 ```latex
 \changefont{cmss}{sbc}{n}    % Schrift ändern
-\NeuerBegriff{Cloud Computing}        % Fett
-\Fachbegriff{Algorithmus}             % Kursiv
-\Fachbegriff[Erklärung]{Algorithmus}  % Mit Glossar
+\textbf{Cloud Computing}        % Fett
+\textit{Algorithmus}             % Kursiv
+\underline[Erklärung]{Algorithmus}  % Mit Glossar
 ```
 
 ### 🔤 Abkürzungen
@@ -154,7 +297,8 @@ In den Kapiteln~\ref{chap:einleitung} und~\ref{chap:methodik}
 
 ## 📚 Zitation und Literatur
 
-Die Zitation erfolgt in LaTeX mithilfe von Bibtex Dateien. Mithilfe von Better Bibtex kann der Prozess noch vereinfacht werden. Die Verwendung im text erfolgt durch die folgenden Befehle. Diese Befehle dienen der Inline Zitation. In der ersten Klammer wird der Bibtexkey genutzt, um das Buch zu referenzieren. In der zweiten Klammer die Seitenzahl. 
+Die Zitation erfolgt in LaTeX mithilfe von Bibtex Dateien. Mithilfe von Better Bibtex kann der Prozess noch vereinfacht werden. Die Verwendung im Text erfolgt durch die folgenden Befehle. Diese Befehle dienen der Inline Zitation. In der ersten Klammer wird der Bibtexkey genutzt, um das Buch zu referenzieren. In der zweiten Klammer die Seitenzahl. 
+!!! Wichtig, in dieser Vorlage wird biber von biblatex genutzt, es muss also auch mit dem entsprechenden bibeer Build Recipe gebaut werden !!!
 
 ```latex
 % Zitate im Text

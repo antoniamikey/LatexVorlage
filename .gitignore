@@ -16,3 +16,7 @@
 *.fls
 *.ind
 *.fdb_latexmk
+
+
+# *.pdf
+# Meta.tex
