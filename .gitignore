@@ -18,5 +18,5 @@
 *.fdb_latexmk
 
 
-# *.pdf
-# Meta.tex
+*.pdf
+Meta.tex
