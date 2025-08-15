@@ -159,6 +159,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 
+
 % Grundlegende Farben für Listings
 \definecolor{hellgelb}{rgb}{1,1,0.9}
 \definecolor{colKeys}{rgb}{0.8,0,0.5}
@@ -186,8 +187,11 @@
   backgroundcolor=\color{white}, % weißer Hintergrund
   breakautoindent=true,
   escapeinside={(*}{*)},
-  literate={Ö}{{\"O}}1 {Ä}{{\"A}}1 {Ü}{{\"U}}1 {ß}{{\ss}}2 {ü}{{\"u}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {µ}{\textmu}1,
-  captionpos=b % Caption unter dem Listing
+  literate={µ}{\textmu}1 {\$}{{\textdollar}}1,
+  literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+           {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+           {ß}{{\ss}}1 {µ}{\textmu}1,
+  captionpos=b, % Caption unter dem Listing
 }
 
 % Sprachdefinitionen für Listings
