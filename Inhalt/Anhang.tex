@@ -1,22 +1,78 @@
 % !TEX encoding = UTF-8 Unicode
-% !TEX root =  Main.tex
+% !TEX root =  ../Main.tex
 
-% Beispiel: 
+\clearpage
+\section*{Antrag zur Erstattung des Semestertickets}\label{app:antrag}\addcontentsline{app}{section}{Antrag zur Erstattung des Semestertickets}
+\begin{figure}[H]
+  \centering
+  \includegraphics[page=1,width=\textwidth,height=1\textheight,keepaspectratio]{Bilder/Antrag.pdf}
+\end{figure}
 
+\clearpage
+\begin{figure}[H]
+  \centering
+  \includegraphics[page=2,width=\textwidth,height=1\textheight,keepaspectratio]{Bilder/Antrag.pdf}
+\end{figure}
 
-\includepdf[
-    pages=1,
-    scale=0.8,
-    frame=true, 
-    offset=0 -1cm,
-    pagecommand={\section{Antrag zur Erstattung des Semestertickets}\phantomsection\label{sec:Antrag}\label{pdf:Antrag}}
-]{Bilder/Antrag.pdf}
+\clearpage % Sorgt dafür, dass die nächste Section auf einer neuen Seite beginnt
 
-\includepdf[
-    pages=2-,
-    scale=0.8,
-    frame=true,
-    offset=0 -1cm
-]{Bilder/Antrag.pdf}
+\section*{BPMN-IST-Modell des Antragsprozesses}\label{app:istprozess}\addcontentsline{app}{section}{BPMN-IST-Modell des Antragsprozesses}
+\begin{figure}[H] % H erzwingt die Positionierung genau hier
+  \centering
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Bilder/BPMNistProzess.png}
+  \caption{BPMN-IST-Modell des Antragsprozesses}\label{fig:istProzess}
+\end{figure}
 
+\clearpage
 
+\section*{BPMN-SOLL-Model des Antragsprozesses}\label{app:sollprozess}\addcontentsline{app}{section}{BPMN-SOLL-Model des Antragsprozesses}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Bilder/BPMNsollProzess.png}
+  \caption{BPMN-SOLL-Model des Antragsprozesses}\label{fig:sollProzess}
+\end{figure}
+
+\clearpage
+
+\section*{Antragsformular}\label{app:antragsformular}\addcontentsline{app}{section}{Antragsformular}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Bilder/Antragsformular.png}
+  \caption{User Interface des Antragsformulars}
+\end{figure}
+
+\clearpage
+
+\section*{Antragsübersicht}\label{app:antragsuebersicht}\addcontentsline{app}{section}{Antragsübersicht}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Bilder/Aktuelle_Anträge.png}
+  \caption{User Interface des Bearbeitungsportals auf der Seite \glqq{}Antragsübersicht\grqq{}}
+\end{figure}
+
+\clearpage
+
+\section*{Detailansicht eines Antrags}\label{app:detailansicht}\addcontentsline{app}{section}{Detailansicht eines Antrags}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Bilder/Detail_Antrag.png}
+  \caption{Detailansicht eines Antrags}
+\end{figure}
+
+\clearpage
+
+\section*{Entity-Relationship-Modell}\label{app:erm}\addcontentsline{app}{section}{Entity-Relationship-Modell}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Bilder/ERM2.png}
+  \caption{\gls{erm} des Antragsprozesses}
+\end{figure}
+
+\clearpage
+
+\section*{Relationales Datenbankschema}\label{app:datenbankschema}\addcontentsline{app}{section}{Relationales Datenbankschema}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Bilder/Datenbankschema.png}
+  \caption{Relationales Datenbankschema für den Antragsprozess}\label{fig:datenbankmodell}
+\end{figure}

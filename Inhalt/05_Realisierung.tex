@@ -1,57 +1,14 @@
 % !TEX encoding = UTF-8 Unicode
 % !TEX root =  ../Main.tex
 
-\chapter{Realisierung}\label{cha:prototyp}
+\chapter{Realisierung}\label{cha:Realisierung}
 In diesem Kapitel wird die Entwicklung der Softwarelösung zur Antragsbearbeitung beim \gls{asta} der \gls{hwr} erläutert. Bei der Entwicklung werden die Anforderungen aus Kapitel~\ref{sec:Anforderungsanalyse} sowie die erarbeiteten Aspekte aus Kapitel~\ref{sec:Systementwurf} umgesetzt. 
 
 Die Webanwendung soll auf der Website des \gls{asta} erscheinen. Da die aktuelle Website au WordPress basiert, müssen das Antragsformular als auch das Bearbeitungsportal mit diesem System kompatibel sein. WordPress ist ein \gls{cms}, das primär der Bereitstellund und Verwaltung von Inhalten dient. Neben dem Aufbau statischer und dynamischer Websites ermöglicht es das Management und die Verwaltung von Daten sowei die Speicherung von Dokumenten, Fotos, Videos und wieteren Formaten. WordPress ist beliebt, weil es auch für Personen ohne technischen Hintergrund leicht zu bedienen ist, eine große Auswahl an kostenlos verfügbaren Themes und Plug-ins anbietet und sich flexibel an unterscheidliche Anforderungen anpassen lässt. \VglZitat{kumarWordPressMultiFunctionalContent2021}{158 f.}
 
 Für den Betrieb ist serverseitig die Verwendung von PHP7.4 oder höher sowie einer relationalen Datenbank MySQL5.7 oder MariaDB 10.3 oder höhrer notwendig.\VglZitat{AdvancedAdministrationHandbook2023}{} In diesem System wird MySQL verwendet. WordPress benötigt eine Datenbank, deshalb ist es sinnvoll ein zusätzliches Tool zur Verwaltung dieser einzusetzen. In dieser Lösung wird Adminer verwendet. Nach dem Login können dort sämtliche Datensätze eingesehen und verwaltet werden, was das Erstellen, Bearbeiten, Löschen und Exportieren von Daten einschließt. 
 
-Um die Anwendung später auf einem Server bereitstellen zu können, wird die Zielumgebung in der Entwicklung mit Docker simuliert. Das ermöglicht eine reproduzierbare lokale Entwicklungsumgebung, die sich später auf den Server übertragen lässt. Die verwendeten Images für WordPress, die MySQL Datenbank sowie adminer stammen aus dem offiziellen Docker Hub Registry. Die Konfiguration erfolgt über die docker-compose, wobei die Umgebungsvariablen zur Sicherheit in einer .env-Datei gespeichert werden (siehe Listing~\ref{lst:dockercompose}).\\
-
-\begin{lstlisting}[language=yaml,caption={docker-compose.yml Beispiel},label={lst:dockercompose}]
-services:
-  WordPress:
-    image: WordPress:php8.1-apache
-    container_name: WordPress
-    ports:
-      - "8080:80"
-    environment:
-      WordPress_DB_HOST: ${WordPress_DB_HOST}
-      WordPress_DB_NAME: ${WordPress_DB_NAME}
-      WordPress_DB_USER: ${WordPress_DB_USER}
-      WordPress_DB_PASSWORD: ${WordPress_DB_PASSWORD}
-      WordPress_DEBUG: ${WordPress_DEBUG}
-      WordPress_TABLE_PREFIX: ${WordPress_TABLE_PREFIX}
-    volumes:
-      - ./wp-content:/var/www/html/wp-content
-    depends_on:
-      - db 
-
-  db:
-    image: mysql:8
-    container_name: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    ports:
-      - "3307:3306"
-    volumes:
-      - db_data:/var/lib/mysql
-
-  adminer:
-    image: adminer
-    container_name: adminer
-    restart: always
-    ports:
-      - 8081:8080
-
-volumes:
-  db_data:
-\end{lstlisting}
+Um die Anwendung später auf einem Server bereitstellen zu können, wird die Zielumgebung in der Entwicklung mit Docker simuliert. Das ermöglicht eine reproduzierbare lokale Entwicklungsumgebung, die sich später auf den Server übertragen lässt. Die verwendeten Images für WordPress, die MySQL Datenbank sowie adminer stammen aus dem offiziellen Docker Hub Registry. Die Konfiguration erfolgt über die docker-compose, wobei die Umgebungsvariablen zur Sicherheit in einer .env-Datei gespeichert werden. \VglZitat{Schikora_Antragsformular_und_Bearbeitungsportal_2025}{}
 
 WordPress verfügt sowohl über ein Frontend als auch ein Backend. Das Frontend ist die für Nutzer:innen sichtbare Website, die die Nutzer:innen. In diesem Fall die Seite für die Studierenden. Das Backend hingegen stellt der Administrationsbereich dar. Hier können Einstellungen zur Website konfiguriert, Nutzerrollen definiert und verteilt, und Themes und Plug-ins installiert werden. Der Zugriff auf das Backend erfordert eine Anmeldung über eine Login-Maske. Abhängig von der Benutzerrolle kann festgelegt werden, welche Bereiche des Administrationsbereichs angezeigt oder ausgeblendet werden. \VglZitat{steyerWordPressEinfuehrungContent2016}{93 ff.}
 
@@ -71,7 +28,7 @@ Nach der Installation und Ausführung des des Wordpress-Images in Docker ergibt 
 
 Im Rahmen dieser Arbeit wurden drei solcher Plug-ins entwickelt. Alle drei zusammen bilden ein System zur Antragsstellung und Antragsbearbeitung beim \gls{asta} der \gls{hwr}. Ein Plug-in ist für den Datenbankaufbau und -struktur zuständig. Ein weiteres Plug-in stellt da Antragsformular für die \gls{asta} Website und deren Datenverarbeitung bereit, es ist also für das WordPress Frontend anwendbar. Das dritte Plug-in stellt das Bearbeitungsportal für die Mitarbeitenden des Sozialbüros bereit, dieses agiert im WordPress Backend. Es ergibt sich die Ordnerstruktur dargestellt in Abbildung~\ref{fig:ordnerstruktur_projekt}. Die Plug-ins folgen einer ähnlichen Struktur. Es gibt immer eine Hauptdatei mit dem Plug-In-Header, Hooks und Funktionsaufrufen. In dem Unterverzeichnis \Code{includes/} sind die implementierten Funktionen (Business Logik) hinterlegt und in dem Ordner \Code{templates/} befinden sich die HTML-Vorlagen als Erschnungsbild der Ausgabe im Browser. 
 
-\begin{figure}[htbp]
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=0.3\textwidth]{Bilder/Ordnerstruktur_Projekt.png}
   \caption{Ordnerstruktur des Projektes mit den drei Plugins}\label{fig:ordnerstruktur_projekt}
@@ -82,18 +39,7 @@ Jedes Plug-in enthält in der Hauptdatei einen Plug-in Header. Dieser ist notwen
 
 % -------------------------------DATENBANK--------------------------------
 \section{Datenbank}\label{sec:Datenbank}
-Das Datenbank Plug-in ist von den drei entwickelten Plug-ins das simpelste, da es lediglich aus einer einzigen PHP-Datei besteht. Die Datei implementiert nur einen Hook zur Aktivierung des Plug-ins. Der Grund dafür ist, dass bei der Deaktivierung oder Löschung des Plug-ins keine Daten aus der Datenbank entfernt werden sollen. Die bei der Aktivierung aufgerufene Funktion erstellt acht Datenbanktabellen gemäß dem in Kapitel~\ref{sec:Datenmodell} beschriebenen Datenbankschemas. Die Programmiersprache ermöglicht es, mithilfe von Datenbankfunktionen SQL-Befehle direkt auszuführen. Ein Beispiels dafür ist in Listing~\ref{lst:studenttable} dargestellt, in dem exemplarisch die Erstellung der Tabelle student gezeigt wird. \VglZitat{Schikora_Antragsformular_und_Bearbeitungsportal_2025}{} \\
-
-
-\begin{lstlisting}[caption={SQL-Statement zur Erstellung der Tabelle 'student'},label={lst:studenttable},language=SQL]
-$sql_student = "CREATE TABLE {$wpdb->prefix}student(
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  vorname VARCHAR(255) NOT NULL,
-  nachname VARCHAR(255) NOT NULL,
-  matrikelnummer VARCHAR(11) NOT NULL UNIQUE,
-  email VARCHAR(255) NOT NULL
-) $charset_collate;";
-\end{lstlisting}
+Das Datenbank Plug-in ist von den drei entwickelten Plug-ins das simpelste, da es lediglich aus einer einzigen PHP-Datei besteht. Die Datei implementiert nur einen Hook zur Aktivierung des Plug-ins. Der Grund dafür ist, dass bei der Deaktivierung oder Löschung des Plug-ins keine Daten aus der Datenbank entfernt werden sollen. Die bei der Aktivierung aufgerufene Funktion erstellt acht Datenbanktabellen gemäß dem in Kapitel~\ref{sec:Datenmodell} beschriebenen Datenbankschemas. Die Programmiersprache ermöglicht es, mithilfe von Datenbankfunktionen SQL-Befehle direkt auszuführen. \VglZitat{Schikora_Antragsformular_und_Bearbeitungsportal_2025}{}
 
 Zur Vermeidung von Redundanzen gibt es eine Sicherheitsfunktion, welche verhindert, dass Tabellen mehrfach erstellt werden, falls das Plugin deinstalliert und anschließend erneut installiert wird. Darüber hinaus werden Datensätze für die Tabelle \Code{antragsgruende}, \Code{status} und der Defaulmitarbeiter \glqq{}Leer\grqq{} bei der Installation in die entsprechenden Tabellen eingefügt. Nach der Installation des Plugins sind die Tabellen über den Datenbank-Manager Adminer einsehbar. Darüber können ebenfalls neue Datensätze hinzugefügt oder bearbeitet werden.
 
@@ -103,7 +49,7 @@ Zur Vermeidung von Redundanzen gibt es eine Sicherheitsfunktion, welche verhinde
 Das Antragsformular Plug-in weißt im Gegensatz zum Datenbank Plug-in eine höhere Komplexität auf. Es gliedert sich in die Dateien \Code{antragsformular.php}, \Code{templates/form.php} und \Code{includes/form-functions.php}. 
 Die Datei \Code{antragsformular.php} bildet die zentrale Komponente des Plug-ins. Sie implementiert die Intitialisierungsfunktion sowie die Definition des Shortcodes, über den das Plug-in auf jeder WordPress seite eingebunden werden kann, solange es installiert ist. Die Hauptdatei verweist sowohl auf das HTML-Form, welches die Nutzeroberfläche bereitstellt, als auch auf die Datei \Code{form-functions.php}, in der die funktionale Logik implementiert ist. 
 
-Die aufgerufene HTML Datei orientiert sich an dem zuvor erstellten Mockup (siehe Kapitel~\ref{sec:Antragsformular}. Das Formular wird nicht als reine HTML Datei gespeichert, sondern als PHP Datei. Das ermöglicht die Implementierung dynamischer Funktionen wie die Anzeige einer Erfolgsnachricht nach dem Absenden des Antrags. Zusätzlich werden JS-Elemente verwendet, um dem Formular bem Anklicken der Option \glqq{}abweichender Kontoinhaber\grqq{} ein zusätzliches Feld zum Upload einer schriftlichen Bestätigung hinzuzufügen. 
+Die aufgerufene HTML Datei orientiert sich an dem zuvor erstellten Mockup (siehe Kapitel~\ref{sec:Antragsformular_entwurf}. Das Formular wird nicht als reine HTML Datei gespeichert, sondern als PHP Datei. Das ermöglicht die Implementierung dynamischer Funktionen wie die Anzeige einer Erfolgsnachricht nach dem Absenden des Antrags. Zusätzlich werden JS-Elemente verwendet, um dem Formular bem Anklicken der Option \glqq{}abweichender Kontoinhaber\grqq{} ein zusätzliches Feld zum Upload einer schriftlichen Bestätigung hinzuzufügen. 
 
 Die Datein \Code{form-functions.php} enthält die Business Logik des Plugins. Sie besteht aus einer zentralen Funktion, die beim Abensenden eines Formulars ausgeführt wird, sowie verschiedener Hilfsfunktionen. Diese Hilfsfunktionen dienen zum Großteil der Überprüfung eingegebener Daten. Es wird als erstes geprüft, ob alle erforderlichen Felder ausgefüllt wurden und sofern es möglich ist, werden Validierungen durchgeführt (beispielsweise für die IBAN, BIC oder Matrikelnummer) (siehe Kapitel~\ref{sec:security}). Die hochgeladenen Dokumente werden auf ihre Größe und den Dateityp überprüft. Das Limit liegt bei insgesamt 5 MB. Es wird außerdem kontrolliert, ib ein:e Student:in bereits im System registriert ist und ob für das beantragte Semester bereits ein Antrag vorliegt. Das verhindert doppelte Bearbeitungen und Auszahlungen. Treten Fehler auf, wird eine Benachrichtigung ausgegeben. Abschließend werden die Eingaben sanitized, in der Datenbank abgelegt und ein neuer Historieneintrag für diesen Antrag mit dem Status \glqq{}Neu\grqq{} erstellt. \VglZitat{Schikora_Antragsformular_und_Bearbeitungsportal_2025}{}
 
@@ -113,7 +59,7 @@ Die Datein \Code{form-functions.php} enthält die Business Logik des Plugins. Si
 \section{Bearbeitungsprotal}\label{sec:Bearbeitungsprotal}
 Das Bearbeitungsportal stellt im WordPress-Administrationsbereich die Oberfläche zur Bearbeitung und Verwaltung der Anträge bereit. Es besteht aus zwei zentralen Komponenten: der Übersicht aller Anträge und der Detailansicht eines einzelnen Antrags. Beide Komponenten werden in der Hauptdatei des Plug-ins zusammengeführt, welche zusätzlich über die Funktion \Code{add_menu_page()} einen Menüeintrag im Administrationsbereich registriert und die Funktionen zur Anzeige aller Anträge verknüpft. 
 
-Die HTML-Templates für die Ansicht aller Anträge und die Detailansicht eines Antrags orientieren sich an dem in Kapitel~\ref{sec:Bearbeitungsportal} entwickelten Mockup. Für die Übersichtsseite wird ein Filtermenü generiert, über welches Anträge anhand vordefinierter Statusgruppen gefiltert werden können. Das HTML-Skript der Übersichtsseite definiert außerdem die Verlinkung des \glqq{}Details\grqq{}-Buttons zur Detailseite eines Antrags. Die Businesslogik der Übersichtsseite lädt die Anträge per \Code{\$wpdb}-Abfrage aus der Datenbank und sortiert sie standardmäßig nach Antrags-ID. Eine zusätzliche Funktion ordnet jedem Status eine bestimmte CSS-Klasse zu, um die Statusanzeige farblich zu kennzeichnen. Das erleichtert die visuelle Zuordnung für die Mitarbeitenden. In einer weiteren Funktion werden die Statusgruppen definiert, nach denen gefiltert werden kann, sowie die Funktionalität, welche Anträge beim Filtern tatsächlich angezeigt werden. Technisch werden mehrere Statuswerte in Arrays zusammengefasst und anschließend durch die Filterlogik ausgewertet (siehe Listing~\ref{lst:statusgruppen}).
+Die HTML-Templates für die Ansicht aller Anträge und die Detailansicht eines Antrags orientieren sich an dem in Kapitel~\ref{sec:Bearbeitungsportal} entwickelten Mockup. Für die Übersichtsseite wird ein Filtermenü generiert, über welches Anträge anhand vordefinierter Statusgruppen gefiltert werden können. Das HTML-Skript der Übersichtsseite definiert außerdem die Verlinkung des \glqq{}Details\grqq{}-Buttons zur Detailseite eines Antrags. Die Businesslogik der Übersichtsseite lädt die Anträge per \Code{\$wpdb}-Abfrage aus der Datenbank und sortiert sie standardmäßig nach Antrags-ID. Eine zusätzliche Funktion ordnet jedem Status eine bestimmte CSS-Klasse zu, um die Statusanzeige farblich zu kennzeichnen. Das erleichtert die visuelle Zuordnung für die Mitarbeitenden. In einer weiteren Funktion werden die Statusgruppen definiert, nach denen gefiltert werden kann, sowie die Funktionalität, welche Anträge beim Filtern tatsächlich angezeigt werden. Technisch werden mehrere Statuswerte in Arrays zusammengefasst und anschließend durch die Filterlogik ausgewertet (siehe Listing~\ref{lst:statusgruppen}).\\
 
 \begin{lstlisting}[caption={PHP-Array zur Definition der Statusgruppen},label={lst:statusgruppen},language=PHP]
 $status_gruppen = [
@@ -126,7 +72,7 @@ $status_gruppen = [
 \end{lstlisting}
 
 
-Die Businesslogik der Detailansicht verarbeitet zum Großteil alle Bearbeitungsaktionen wie \glqq{}Annehmen\grqq{}, \glqq{}Ablehnen\grqq{}, \glqq{}Daten nachfordern\grqq{}, \glqq{}Archivieren\grqq{} oder \glqq{}Zurückziehen\grqq{}. Eine zentrale Funktion \Code{bp_get_context_status()} ermittelt einen Hilfsstatus aus der Antragshistorie, um abhängig vom bisherigen Verlauf nur zulässige Statusübergänge zu erlauben und unzulässige Änderungen mit Fehlermeldungen abzufangen (siehe Listing~\ref{lst:contextstatus}). Dieser Hilfsstatus sorgt dafür, dass das Ergebnis einer Entscheidung vom Kontext, also der Historie, abhängt (siehe Listing~\ref{lst:statusswitch}). Ein Beispiel hierfür ist die erneute Bearbeitung eines archivierten Antrags. War dieser vorher erstbewilligt, wird er nach einer zweiten Bewilligung als zweitbewilligt markiert. Wird der Antrag jedoch bei der Zweitprüfung abgelehnt, ändert sich der Status zu \glqq{}Erneute Prüfung notwendig\grqq{}. 
+Die Businesslogik der Detailansicht verarbeitet zum Großteil alle Bearbeitungsaktionen wie \glqq{}Annehmen\grqq{}, \glqq{}Ablehnen\grqq{}, \glqq{}Daten nachfordern\grqq{}, \glqq{}Archivieren\grqq{} oder \glqq{}Zurückziehen\grqq{}. Eine zentrale Funktion \Code{bp_get_context_status()} ermittelt einen Hilfsstatus aus der Antragshistorie, um abhängig vom bisherigen Verlauf nur zulässige Statusübergänge zu erlauben und unzulässige Änderungen mit Fehlermeldungen abzufangen (siehe Listing~\ref{lst:contextstatus}). Dieser Hilfsstatus sorgt dafür, dass das Ergebnis einer Entscheidung vom Kontext, also der Historie, abhängt (siehe Listing~\ref{lst:statusswitch}). Ein Beispiel hierfür ist die erneute Bearbeitung eines archivierten Antrags. War dieser vorher erstbewilligt, wird er nach einer zweiten Bewilligung als zweitbewilligt markiert. Wird der Antrag jedoch bei der Zweitprüfung abgelehnt, ändert sich der Status zu \glqq{}Erneute Prüfung notwendig\grqq{}. \\
 
 \begin{lstlisting}[caption={PHP-Funktion zur Ermittlung des Kontextstatus aus der Antragshistorie},label={lst:contextstatus},language=PHP]
 function bp_get_context_status($antrag_id) {
@@ -156,7 +102,6 @@ function bp_get_context_status($antrag_id) {
 }
 \end{lstlisting}
 
-
 \begin{lstlisting}[caption={PHP-Switch-Logik zur Statusänderung eines Antrags},label={lst:statusswitch},language=PHP]
 $kontext_status = bp_get_context_status($antrag_id);
 if (is_wp_error($kontext_status)) {
@@ -180,57 +125,17 @@ Wird eine Statusänderung vorgenommen, überprüft die Logik zunächst die Nutze
 
 % -------------------------------_SECURITY--------------------------------
 \section{Security}\label{sec:security}
-Die entwickelten Plug-ins folgen den Sicherheits Best-Practices der offziellen WordPress-Dokumentation (siehe \Zitat{SecurityCommonAPIs2022}{}). Ein zentrales Sicherheitsprinzip ist das Sanatizing der Daten und wo möglich die Validierung. Unter Sanitizing wird das Bereinigen der Daten verstnadne, um schädliche und unzulässige Inhalte zu entfernen. Validierung hingegehn überprüft, ob die Daten einem vorgegebene Format oder Muster entsprechen. Im Antragsformular-Plug-in ist das besinders relevant, da externe Nutzer:innen Daten in das System eingeben und diese in die Datenbank übernommen werden. Es werden deshalb alle Daten vor der Übernahme in die Datenbank sanatized. Dafür gibt es WordPress eigene Funktionen. Ein Beispiel aus der Datei \Code{form-function.php} ist in Listing~\ref{lst:sanatize_data} zu sehen. Die Validierung erfolgt für das Datenfeld E-Mail, da diese die Endung \glqq{}@stud.hwr-berlin.de\grqq{} haben muss. Die IBAN wird nach dem internationalen Standard ISO 13616 geprüft und die BIC nach der ISO 9362. Die Matrikelnummer wird zusätzlich auf die korrekte Länge geprüft. Auch die einfach Überprüfung, ob alle Felder ausgefüllt wurden, gehört bereits zur Datenvalidierung. 
+Die entwickelten Plug-ins folgen den Sicherheits Best-Practices der offziellen WordPress-Dokumentation (siehe \Zitat{SecurityCommonAPIs2022}{}). Ein zentrales Sicherheitsprinzip ist das Sanatizing der Daten und wo möglich die Validierung. Unter Sanitizing wird das Bereinigen der Daten verstnadne, um schädliche und unzulässige Inhalte zu entfernen. Validierung hingegehn überprüft, ob die Daten einem vorgegebene Format oder Muster entsprechen. Im Antragsformular-Plug-in ist das besinders relevant, da externe Nutzer:innen Daten in das System eingeben und diese in die Datenbank übernommen werden. Es werden deshalb alle Daten vor der Übernahme in die Datenbank sanatized. Dafür werden die WordPress eigenen Funktionen \Code{sanatize_text_field()} und \Code{sanatize_email()} verwendet. Die Validierung erfolgt für das Datenfeld E-Mail, da diese die Endung \glqq{}@stud.hwr-berlin.de\grqq{} haben muss. Die IBAN wird nach dem internationalen Standard ISO 13616 geprüft und die BIC nach der ISO 9362. Die Matrikelnummer wird zusätzlich auf die korrekte Länge geprüft. Auch die einfach Überprüfung, ob alle Felder ausgefüllt wurden, gehört bereits zur Datenvalidierung. \VglZitat{Schikora_Antragsformular_und_Bearbeitungsportal_2025}{}
 
-\begin{lstlisting}[caption={PHP-Funktion zur Aufbereitung und Sanitizing der Formulardaten},label={lst:sanatize_data},language=PHP]
-function af_prepare_form_data() {
-  return [
-    'vorname' => sanitize_text_field($_POST['vorname']),
-    'nachname' => sanitize_text_field($_POST['nachname']),
-    'matrikelnummer' => sanitize_text_field($_POST['matrikelnummer']),
-    'email' => sanitize_email($_POST['email']),
-  ];
-}
-\end{lstlisting}
+Zum Schutz vor Cross-Site Request Forgery werden Noncs eingesetzt. Nonce sthet für \glqq{}Number used once\grqq{} und meint einen von WordPress als benutzer- und kontextbezogenen generierten Hashwert, der nur für eine bestimmte Zeit gültig ist. Durch ihre Einzigartigkeit können sie in der URL vor Missbrauch schützen. In dem Antragsformular-Plug-in werden sie genutzt, um sicherzustellen, dass Anträge ausschließlich über die WordPress Seite eingereicht werden und nicht durch manipulierte Skripte. Auch zur Bearbeitung eines Antrags durch die Mitarbeitenden des Sozialbüros werden Nonces verwendet, um zu verhindern, dass Statusänderungen unbefugt vorgenommen werden.  WordPress stellt hierfür eine eigene Funktion \Code{wp_verify:nonce()} zur Verfügung.
 
-Zum Schutz vor Cross-Site Request Forgery werden Noncs eingesetzt. Nonce sthet für \glqq{}Number used once\grqq{} und meint einen von WordPress als benutzer- und kontextbezogenen generierten Hashwert, der nur für eine bestimmte Zeit gültig ist. Durch ihre Einzigartigkeit können sie in der URL vor Missbrauch schützen. In dem Antragsformular-Plug-in werden sie genutzt, um sicherzustellen, dass Anträge ausschließlich über die WordPress Seite eingereicht werden und nicht durch manipulierte Skripte. Auch zur Bearbeitung eines Antrags durch die Mitarbeitenden des Sozialbüros werden Nonces verwendet, um zu verhindern, dass Statusänderungen unbefugt vorgenommen werden.  WordPress stellt hierfür eine eigene Funktion zur Verfügung (siehe Listing~\ref{lst:noncecheck}).
-
-\begin{lstlisting}[caption={PHP-Code zur Überprüfung des Nonce beim Statuswechsel},label={lst:noncecheck},language=PHP]
-if (!wp_verify_nonce($_POST['antrag_nonce'], 'antrag_status_aendern')) {
-  return new WP_Error('security_error', 'Sicherheitsfehler: Ungültige Anfrage.');
-}
-\end{lstlisting}
-
-Wie bereits erläutert unterstützt Wordpress die Verwendung eines Rollenkonzeptes. Neben vordefinierten Rollen wie \glqq{}Administrator\grqq{} und \glqq{}Mitarbeiter\grqq{} wurde für das Bearbeitungsportal eine eigene Rolle \glqq{}Sozialbuero\grqq{} angelegt. Nur Personen mit dieser Rolle sowie Administrator:innen können die Anträge im Backend einsehen und bearbeiten. Die Rechteüberprüfung erfolgt sowohl bei der Anzeige des Bearbeitungsportals (siehe Listing~\ref{lst:rolecheck}) als auch bei der Statusänderung eines Antrags. Auch hier wird unbefugter Zugriff eingeschränkt.
-
-\begin{lstlisting}[caption={PHP-Code zur Rechteüberprüfung für das Bearbeitungsportal},label={lst:rolecheck},language=PHP]
-if (!current_user_can('manage_antraege')) {
-  wp_die('Sie haben keine Berechtigung, diese Seite zu sehen.');
-}
-\end{lstlisting}
+Wie bereits erläutert unterstützt Wordpress die Verwendung eines Rollenkonzeptes. Neben vordefinierten Rollen wie \glqq{}Administrator\grqq{} und \glqq{}Mitarbeiter\grqq{} wurde für das Bearbeitungsportal eine eigene Rolle \glqq{}Sozialbuero\grqq{} angelegt. Nur Personen mit dieser Rolle sowie Administrator:innen können die Anträge im Backend einsehen und bearbeiten. Die Rechteüberprüfung erfolgt sowohl bei der Anzeige des Bearbeitungsportals als auch bei der Statusänderung eines Antrags. Auch hier wird unbefugter Zugriff eingeschränkt. 
 
 SQL-Injection wird durch den Einsatz der \$wpdb-API verhindert. Datenbankabfragen werden ausschließlich über vorbereitete Statements (\$wpdb->prepare()) oder die Einfügefunktion (\$wpdb->insert()) ausgeführt. \Code{\$wpdb->prepare()} verwendet Platzhalter wie \%d oder \%s anstatt Varuablen direkt in den SQL String einzusetzen. WordPress ersetzt diese Platzhalter dann automatisch in die übergebenen Werte. \Code{\$wpdb->insert} hingegen sorgt dafür, dass kein SQl string übergeben wird sondern ein Array, der Spalten bestimte Werte zuordnet. Die Daten werden dann gecleaned und korrekt an die Datenbank übergeben. 
-Cross-Site-Scripting wird durch kontextsensitives Escaping verhindert. Daten werden dabei vor der Ausgabe im Browser mithilfe von bestimmten WordPress-Funktionen (wie in Listing xy zu sehen) in reinen Text umgewandelt, sodass eingeschleuster Code nicht ausgeführt werden kann. 
 
-\begin{lstlisting}[caption={HTML/PHP-Code zur Statusanzeige im Bearbeitungsportal},label={lst:statusanzeige},language=HTML]
-<div class="wrap">
-  <div class="flex items-center justify-between mb-8">
-    <h1 class="text-3xl font-bold">Antrag #<?php echo esc_html($antrag->id); ?></h1>
-    <a href="<?php echo esc_url(admin_url('admin.php?page=antragsverwaltung')); ?>" 
-       class="px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition">
-       Zurück zur Übersicht
-    </a>
-  </div>
+Cross-Site-Scripting wird durch kontextsensitives Escaping verhindert. Daten werden dabei vor der Ausgabe im Browser mithilfe von bestimmten WordPress-Funktionen wie \Code{esc_url()} und \Code{esc_html()} in reinen Text umgewandelt, sodass eingeschleuster Code nicht ausgeführt werden kann. 
 
-  <!-- Status -->
-  <div class="mb-6">
-    <span class="px-4 py-2 rounded-full text-sm font-medium <?php echo bp_status_color_class($aktueller_status->aktueller_status); ?>">
-      <?php echo esc_html($aktueller_status->aktueller_status); ?>
-    </span>
-  </div>
-\end{lstlisting}
-
-Zum Schutz wird im Kopfbereich jeder PHP-Datei, über die WordPress Konstante ABSPATH verhindert, dass Dateien direkt und ohne den Umweg über das WordPress-System aufgerufen werden können. Wenn diese Konstante nicht definiert ist, wird das Skript beendet (siehe Listing~\ref{lst:directaccess})
+Zum Schutz wird im Kopfbereich jeder PHP-Datei, über die WordPress Konstante ABSPATH verhindert, dass Dateien direkt und ohne den Umweg über das WordPress-System aufgerufen werden können. Wenn diese Konstante nicht definiert ist, wird das Skript beendet (siehe Listing~\ref{lst:directaccess}) \\
 
 \begin{lstlisting}[caption={PHP-Code zum Schutz vor direktem Dateizugriff},label={lst:directaccess},language=PHP]
 if (!defined('ABSPATH')) {

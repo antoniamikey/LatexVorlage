@@ -22,21 +22,9 @@ Um eine Rückerstattung des Semesterticketbeitrags zu beantragen, müssen die St
 
 Nach Abschluss der Erstprüfung wird die E-Mail des/der Antragsstellenden mit einem Tag versehen und zur Zweitprüfung in das E-Mail-Postfach einer/eines anderen Mitarbeitenden verschoben. In der Zweitprüfung identifiziert der/die Mitarbeitende die dem Namen zugeordnet die Antrags-ID aus der Google-Sheets-Tabelle und die dazugehörigen Dokumente aus dem Google-Drive-Verzeichnis. Anschließend werden die Dokumente und die übertragenen Daten in der Google-Sheets-Tabelle ein zweites mal auf ihre Korrektheit und Vollständigkeit überprüft. Abschließend erstellt der/die Zweitprüfende mithilfe des Software-Tools Ultradox einen Bewilligungs- oder Ablehnungsbescheid. Werden Dokumente nicht nachgereicht, bleibt der Antrag unbeabeitet. 
 
-Ablehnungen werden dem/der Studierenden unmittelbar per E-Mail zugesandt. Bei Bewilligungen erfolgt eine Weitereleitung an das Finanzteam des \gls{asta}, um den Auszahlungsprozess anzustoßen. Erst nach der Bestätigung durch das Finanzteam wird der Bewilligungsbescheid an die Studierenden versandt. Dieser Prozess ist in Abbildung~\ref{fig:istProzess} dargestellt. 
+Ablehnungen werden dem/der Studierenden unmittelbar per E-Mail zugesandt. Bei Bewilligungen erfolgt eine Weitereleitung an das Finanzteam des \gls{asta}, um den Auszahlungsprozess anzustoßen. Erst nach der Bestätigung durch das Finanzteam wird der Bewilligungsbescheid an die Studierenden versandt. Dieser Prozess ist in Abbildung~\ref{fig:istProzess} im Anhang dargestellt. 
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.8\textwidth]{Bilder/BPMNistProzess.png}
-  \caption{BPMN-IST-Modell des Antragsprozesses}\label{fig:istProzess}
-\end{figure}
-
-Der aktuelle Prozess verwendet verschiedene voneinander unabhängige Softwarelösungen. Dazu gehören das E-Mail-Postfach des Sozialbüros, Google Drive als Dateisystem, Google Sheets zur tabellarischen Erfassung der Antragsdaten und Ultradox zur Erstellung der Bescheide. Bis auf Ultradox, wo die Daten aus der Google-Sheets-Tabelle nach der Auswahl der Antrags-ID automatisch aufgerufen werden, besteht zwischen den Anwendungen kein automatisierter Zusammenhang (siehe Abbildung~\ref{fig:istTechStack}).
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.8\textwidth]{Bilder/IstTechStack.png}
-  \caption{Darstellung der Zusammenarbeit der Softwarelösungen beim IST-Prozess}\label{fig:istTechStack}
-\end{figure}
+Der aktuelle Prozess verwendet verschiedene voneinander unabhängige Softwarelösungen. Dazu gehören das E-Mail-Postfach des Sozialbüros, Google Drive als Dateisystem, Google Sheets zur tabellarischen Erfassung der Antragsdaten und Ultradox zur Erstellung der Bescheide. Bis auf Ultradox, wo die Daten aus der Google-Sheets-Tabelle nach der Auswahl der Antrags-ID automatisch aufgerufen werden, besteht zwischen den Anwendungen kein automatisierter Zusammenhang.
 
 \subsection{Probleme und Schwachstellen}\label{sec:Probleme_und_Schwachstellen}
 Bei der genauen Betrachtung des aktuellen Prozesses konnten folgende Schwachstellen identifiziert werden: 
@@ -61,7 +49,6 @@ Der aktuelle Antragsprozess umfasst die Verarbeitung und Speicherung personenbez
     \item Der Schutz vor unabsichtlichem Datenverlust oder Datenveränderung (gefordert in §5 \gls{dsgvozitat}) ist nicht gewährleistet. Dokumente und Daten in dem Google-Drive-Verzeichnis sowie der Google-Sheets Tabelle können verändert und gelöscht werden, ohne die Absicherung durch Versionierungen. Ein Backup zur Wiederherstellung (gefordert in §32 Abs. 1 \gls{dsgvozitat}) gibt es nicht. 
     \item Antragsstellenden werden nicht ausreichend darüber informiert, wie ihre Daten gespeichert und verarbeitet werden. Informationen dazu sind weder auf der Website des \gls{asta} der \gls{hwr} \VglZitat{SemtixWebsite}{} noch auf dem Antrag zur Erstattung des Semestertickets zu finden (siehe Anhang~\ref{pdf:Antrag}). Die beantragende Person ist hier lediglich verpflichtet der Verarbeitung der Daten zuzustimmen.
     \item Es gibt keinen Prozess nach §33 \gls{dsgvozitat}, zur Benachrichtung der zuständigen Aufsichtsbehörde bei der Verletzung des Schutzes personenbezogener Daten. 
-    \item 
     \end{itemize} 
 Weitere Anforderungen der \gls{dsgvo} (siehe Kapitel~\ref{sec:Anforderungen}) hingegen werden eingehalten.
 
@@ -73,11 +60,10 @@ In Kapitel~\ref{sec:DatenschutzGoogle} wird deutlich, dass Google LLC wenig Tran
 \section{Anforderungsanalyse}\label{sec:Anforderungsanalyse}
 Auf der Grundlage der zuvor beschriebenen Probleme und Schwachstellen wird im folgenden eine Anforderungsanalyse durchgeführt. Das Ziel ist es funktionale und nicht-funktionale Anforderungen einer neuen Softwarelösung zu Antragsbearbeitung zu definieren und diese als Grundlagen für Entwicklung zu verwenden. 
 
-\subsection{Anwendungseinsatz und technische Anforderungen}\label{sec:Anwendungseinsatz}
+\textbf{Anwendungseinsatz}
+
 Die Softwarelösung soll von Studierenden zur Antragsstellung und den Mitarbeitenden des Sozialbüros zur Antragsbearbeitung verwendet werden. Zur Nutzung der Lösung ist eine stetige Internetverbindung notwendig. Zur Nutzung der Softwarelösung soll ein Computer verwendet werden.  
 
-\subsection{Fachliche Anforderungen}\label{sec:FachlicheAnforderungen}
-Im Folgenden werden primäre Funktionen vorgestellt, die in der Anwendung implementiert werden sollen. 
 \textbf{Funktionale Anforderungen}
 \begin{itemize}
     \item Das System muss alle Anforderungen erfüllen, um in die aktuelle \gls{asta}-Website integriert zu werden. 
@@ -98,13 +84,13 @@ Im Folgenden werden primäre Funktionen vorgestellt, die in der Anwendung implem
 \begin{itemize}
     \item Die Oberfläche soll intuitiv bedienbar sein, sodass neue Mitarbeitende schnell eingearbeitet werden können und Studierende keine Nachfragen zur Bedienung des Formulars an das Sozialbüro stellen müssen. 
     \item Das System soll alle technischen und organisatorischen Maßnahmen der \gls{dsgvo} berücksichtigen, insbesondere §32 \gls{dsgvozitat}.
-    \item Der Zugriff auf das System soll von jedem Browser aus möglich sein. 
 \end{itemize}
 
 \textbf{Abgrenzungskriterien}
+
 Die folgenden Kriterien sind zum aktuellen Zeitpunkt nicht Bestandteil des geplanten Softwareartefakts. Es handelt sich hierbei teilweise um Maßnahmen, die zum realen Einsatz der Software durch das Sozialbüro notwendig sind und deren Realisierung in einer späteren Entwicklungsphase geplant ist. 
 \begin{itemize} 
-    \item Die Möglichkeit, nach der Zweitprüfung eines Antrags, den Bewilligungs- oder Ablehnungsbescheid  direkt über das Bearbeitungsportal generieren zu lassen. 
+    \item Die Möglichkeit, nach der Zweitprüfung eines Antrags, den Bewilligungs- oder Ablehnungsbescheid  direkt über das Bearbeitungsportal generieren zu lassen (beispielsweise durch die Anbindung an Ultradox). 
     \item Der automatische Versand der Bewilligungs- oder Ablehnungsbescheide an das Finanzteam sowie den/die Studierende:n. 
     \item Eine Funktion zur automatischen Nachforderung von Dokumenten, wenn Anträge unvollständig sind. 
     \item Eine Anbindung an die Datenbank der \gls{hwr} um eine eindeutige Identifikation der Studierenden zu gewährleisten und mögliche Angriffe zu vermeiden. 
@@ -124,16 +110,9 @@ Im nächsten Prozessschritt erfolgt die Zweitprüfung. Stimmen die Entscheidunge
 
 Geplant, aber nicht Teil der aktuellen Implementierung ist die Möglichkeit, nach der Zweitprüfung automatisiert einen Bescheid generieren zu lassen und diesen direkt an den/die Studierenden und das Finanzteam weiterzuleiten. 
 
-Die Kommunikation mit Studierenden erfolgt weiterhin per E-Mail. Wenn Unterlagen fehlen oder diese unvollständig sind, müssen diese nachgefordert werden. Die Mitarbeitenden des Sozialbüros haben dafür die Möglichkeiten einen Antrag per Knopfdruck auf den Status \glqq{}Dokumente nachgefordert\grqq{} zu setzen, auch diese Funktion soll in der Zukunft automatisiert werden, ist jedoch nicht Teil der aktuellen Lösung. Anträge, die bis spätestens 30 Tage vor Semesterende nicht vollständig eingereicht wurde, werden auf den Status \glqq{}Archiviert\grqq{} gesetzt. Der gesamte Prozess von Antragseinreichung durch das Online-Formular auf der \gls{asta} Website über die Bearbeitung des Antrags bis hin zum Versandt des Bescheids ist in Abbildung~\ref{fig:sollProzess} dargestellt.
+Die Kommunikation mit Studierenden erfolgt weiterhin per E-Mail. Wenn Unterlagen fehlen oder diese unvollständig sind, müssen diese nachgefordert werden. Die Mitarbeitenden des Sozialbüros haben dafür die Möglichkeiten einen Antrag per Knopfdruck auf den Status \glqq{}Dokumente nachgefordert\grqq{} zu setzen, auch diese Funktion soll in der Zukunft automatisiert werden, ist jedoch nicht Teil der aktuellen Lösung. Anträge, die bis spätestens 30 Tage vor Semesterende nicht vollständig eingereicht wurde, werden auf den Status \glqq{}Archiviert\grqq{} gesetzt. Der gesamte Prozess von Antragseinreichung durch das Online-Formular auf der \gls{asta} Website über die Bearbeitung des Antrags bis hin zum Versandt des Bescheids ist in Abbildung~\ref{fig:sollProzess} im Anhang dargestellt.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.9\textwidth]{Bilder/BPMNsollProzess.png}
-  \caption{BPMN-SOLL-Model des Antragsprozesses}\label{fig:sollProzess}
-\end{figure}
-
-
-\subsection{Antragsformular}\label{sec:Antragsformular}
+\subsection{Antragsformular}\label{sec:Antragsformular_entwurf}
 Das Antragsformular, über welches die Studierenden ihren Antrag einreichen können umfasst eine Reihe von Pflichtfeldern: 
 \begin{multicols}{2}
 \begin{itemize}[noitemsep, topsep=4pt]
@@ -155,36 +134,36 @@ Das Antragsformular, über welches die Studierenden ihren Antrag einreichen kön
 \end{itemize}
 \end{multicols}
 
-Abbildung~\ref{fig:antragsformular} zeigt eine mögliche Visualisierung des Antragsformulars.
+Abbildung~\ref{fig:antragsformular} zeigt eine mögliche Visualisierung des Antragsformulars. Eine größere Darstellung der Abbildung ist im Anhang zu finden. 
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.9\textwidth]{Bilder/Antragsformular.png}
+  \includegraphics[width=0.7\textwidth]{Bilder/Antragsformular.png}
   \caption{User Interface des Antragsformulars}\label{fig:antragsformular}
 \end{figure}
 
 \subsection{Bearbeitungsportal}\label{sec:Bearbeitungsportal}
-Das Bearbeitungsportal für die Mirarbeitenden des Sozialbüros bildet den Kern der Lösung. Wenn der/die Nutzende die Webapplikation aufrufen, wird er/sie auf der ersten Seite aufgefordert, sich einzuloggen. Nach dem Login wird der/die Mitarbeitende zur Antragsübersicht weitergeleitet. Hier werden alle Anträge angezeigt, sortiert nach Antrags-ID. Es gibt die Möglichkeit die Anträge nach ihrem Status zu filtern, um den Mitarbeitende die Arbeit übersichtlicher zu machen. Abbildung~\ref{fig:Antragsübersicht} zeigt eine mögliche Darstellung dieser Seite.
+Das Bearbeitungsportal für die Mirarbeitenden des Sozialbüros bildet den Kern der Lösung. Wenn der/die Nutzende die Webapplikation aufrufen, wird er/sie auf der ersten Seite aufgefordert, sich einzuloggen. Nach dem Login wird der/die Mitarbeitende zur Antragsübersicht weitergeleitet. Hier werden alle Anträge angezeigt, sortiert nach Antrags-ID. Es gibt die Möglichkeit die Anträge nach ihrem Status zu filtern, um den Mitarbeitende die Arbeit übersichtlicher zu machen. Abbildung~\ref{fig:Antragsübersicht} zeigt eine mögliche Darstellung dieser Seite. Eine größere Darstellung der Abbildung ist im Anhang zu finden. 
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.9\textwidth]{Bilder/Aktuelle_Anträge.png}
+  \includegraphics[width=0.7\textwidth]{Bilder/Aktuelle_Anträge.png}
   \caption{User Interface des Bearbeitungsortals auf der Seite \glqq{}Antragsübersicht\grqq{}}\label{fig:Antragsübersicht}
 \end{figure}
 
 
-Zur Bearbeitung eines Antrags muss die Detailansicht geöffnet werden (siehe Abbildung~\ref{fig:detailAnträge}). Auf dieser werden alle von dem/der Studierenden sowie die hochgeladenen Dokumente angezeigt. Hier haben die Mitarbeitenden die Möglichkeit, den Antrag zu bearbeiten und den Status zu verändern, wie in Kapitel~\ref{sec:Systementwurf} beschrieben. 
+Zur Bearbeitung eines Antrags muss die Detailansicht geöffnet werden (siehe Abbildung~\ref{fig:detailAnträge}, eine größere Darstellung der Abbildung ist im Anhang zu finden). Auf dieser werden alle von dem/der Studierenden sowie die hochgeladenen Dokumente angezeigt. Hier haben die Mitarbeitenden die Möglichkeit, den Antrag zu bearbeiten und den Status zu verändern, wie in Kapitel~\ref{sec:Systementwurf} beschrieben. 
 
-\begin{figure}[htbp]
+\begin{figure}[!htb]
   \centering
-  \includegraphics[width=0.8\textwidth]{Bilder/Detail_Antrag.png}
+  \includegraphics[width=0.7\textwidth]{Bilder/Detail_Antrag.png}
   \caption{Detailansicht eines Antrags}\label{fig:detailAnträge}
 \end{figure}
 
 % --------------------------------- ab hier Datenmodell --------------------------------------
 
 \subsection{Datenmodell}\label{sec:Datenmodell}
-Zum Aufbau einer Datenbankstruktur ist es sinnvoll, ein Datenbankschema zu entwickeln. Ein solches konzeptionelles Schema ist das \gls{erm}. Als Entität ist ein Objekt zu verstehen, welches verschidene Charakteristika haben kann. Mehrere Entitäten mit den gleichen Eigenschaften werden als Entitätsmenge zusammengefasst. Bei einer Entitätsmenge ist es deshalb notwendig, ein Attribut zu bestimmen, welches die Entitäten voneinander unterscheidet. Das kann Beispielsweise eine ID sein. Diese Entitätsmengen sind durch Beziehungen verknüpft, welche wiederum selbst Merkmale haben können. Ein solches \gls{erm} kann dann auf eine Datenbank abgebildet werden. \VglZitat{SQL}{29 ff.} Ein \gls{erm} zum Antragsprozess ist in Abbildung~\ref{fig:erm} dargestellt. Es gibt folgende Entitätsmengen: 
+Zum Aufbau einer Datenbankstruktur ist es sinnvoll, ein Datenbankschema zu entwickeln. Ein solches konzeptionelles Schema ist das \gls{erm}. Als Entität ist ein Objekt zu verstehen, welches verschidene Charakteristika haben kann. Mehrere Entitäten mit den gleichen Eigenschaften werden als Entitätsmenge zusammengefasst. Bei einer Entitätsmenge ist es deshalb notwendig, ein Attribut zu bestimmen, welches die Entitäten voneinander unterscheidet. Das kann Beispielsweise eine ID sein. Diese Entitätsmengen sind durch Beziehungen verknüpft, welche wiederum selbst Merkmale haben können. Ein solches \gls{erm} kann dann auf eine Datenbank abgebildet werden. \VglZitat{SQL}{29 ff.} Ein \gls{erm} zum Antragsprozess ist in Abbildung~\ref{fig:erm} dargestellt. Die Abbildung ist vergrößert im Anhang dargestellt. Es gibt folgende Entitätsmengen: 
 \begin{description}
   \item[Student:in:] Das ist die Person, welche den Antrag stellt. Neben einer eindeutigen ID werden auch die personenbezogenen Daten als Attribute gespeichert. Eine Person kann pro Semester nur einen Antrag stellen. 
   \item[Antrag:] Der Antrag ist das Kernstück. Es werden das Semester, Antragsgrund und Antragsdatum sowie die Bankdaten gespeichert. Ein Antrag beinhaltet mehrere Dokumente und er kann verschiedene Bearbeitungszustände während des Prozesses annehmen. 
@@ -199,20 +178,17 @@ Zum Aufbau einer Datenbankstruktur ist es sinnvoll, ein Datenbankschema zu entwi
   \caption{\gls{erm} des Antragsprozesses}\label{fig:erm}
 \end{figure}
 
-Das in Abbildung~\ref{fig:erm} dargestekkte \gls{erm} bildet die Grundlage für die technische Umsetzung der Datenbank. Um die dargestellten Entitten und Beziehungen in einer relationalen Datenbank zu speichern, müssen sie in eine relationales Modell überführt werden. Dieses Modell stellt Daten in Form von Tabellen da, wobei jede Tabelle eine Menge von Datensätzen mit festen Spalten (Attributen) enthält. Bei der Überführung des \gls{erm} müssen bestimmte Abbildungsregeln beachtet werden \VglZitat{SQL}{49 ff.}: 
-1. Jede Entitätsmenge muss einen Primärschlüssel, also ein eindeutiges Attribut aufweisen. 
-2. Jede Beziehungsmenge kann ebenfalls eine eigene Tabelle haben. Diese Tabelle muss keinen Primärschlüssel enthalten, er kann auch durch Fremdschlüssek der Entitätsmengen gebildet werden. 
-3. Komplex-komplexe Beziehungsmengen (also m zu n Beziehungen) benötigen eine eigenständige Tabelle. 
-4. Einfach-komplexe Beziehungsmengen benötigen keine eigenständige Tabelle. Es reicht aus, dass der Primärschlüssel als Fremdschlüssel in der Ausgangstabelle verwendet wird. 
-5. Auch einfach-einfache Beziehungsmengen benötigen keine eigentständige Tabelle. Hier wird ebenfalls der Primärschlüssel als Fremdschlüssel in der Ausgangstabelle referenziert. 
+Das in Abbildung~\ref{fig:erm} dargestellte \gls{erm} bildet die Grundlage für die technische Umsetzung der Datenbank. Um die dargestellten Entitten und Beziehungen in einer relationalen Datenbank zu speichern, müssen sie in eine relationales Modell überführt werden. Dieses Modell stellt Daten in Form von Tabellen da, wobei jede Tabelle eine Menge von Datensätzen mit festen Spalten (Attributen) enthält. Bei der Überführung des \gls{erm} müssen bestimmte Abbildungsregeln beachtet werden \VglZitat{SQL}{49 ff.}:
+\begin{enumerate}
+  \item Jede Entitätsmenge muss einen Primärschlüssel, also ein eindeutiges Attribut aufweisen.
+  \item Jede Beziehungsmenge kann ebenfalls eine eigene Tabelle haben. Diese Tabelle muss keinen Primärschlüssel enthalten, er kann auch durch Fremdschlüssel der Entitätsmengen gebildet werden.
+  \item Komplex-komplexe Beziehungsmengen (also m zu n Beziehungen) benötigen eine eigenständige Tabelle.
+  \item Einfach-komplexe Beziehungsmengen benötigen keine eigenständige Tabelle. Es reicht aus, dass der Primärschlüssel als Fremdschlüssel in der Ausgangstabelle verwendet wird.
+  \item Auch einfach-einfache Beziehungsmengen benötigen keine eigenständige Tabelle. Hier wird ebenfalls der Primärschlüssel als Fremdschlüssel in der Ausgangstabelle referenziert.
+\end{enumerate}
 
-Nach der Anwendung dieser Abbildungsregeln ergibt sich das in Abbilung~\ref{fig:datenbankmodell} dargestellte Datenbankmodell. 
+Nach der Anwendung dieser Abbildungsregeln auf das erstellte \gls{erm} entstand ein Datenbankmodell, wonach die Tabellen der Datenbank beschrieben in Kapite~\ref{sec:Datenbank} erstellt uwrden. Dieses Datenbankmodell befindet sich als Abbilung~\ref{fig:datenbankmodell} im Anhang. 
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=1\textwidth]{Bilder/Datenbankschema.png}
-  \caption{Relationales Datenbankschema für den Antragsprozess}\label{fig:datenbankmodell}
-\end{figure}
 
 
 % Das Relationsmodell beschreibt Daten und ihre Beziehungen zueinander in Form von Tabellen. Daraus hervorgehend entstanden relationale Datenbanken. Relation mein hier nicht, wie umgangssprachlich  verstanden, eine \glqq{}Beziehung\grqq{}, sondern eine Teilmenge aller möglichen Kombinationen der Werte der Attribute, wobei eine Relation als $R$ und die Mengen der Werte der Attribute mit $D_n$ bezeichnet werden.

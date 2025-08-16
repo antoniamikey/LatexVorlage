@@ -2,42 +2,20 @@
 % !TEX root =  ../Main.tex
 \chapter{Fazit und kritische Bewertung}\label{cha:Fazit}
 
-\section{Das Ergebnis}\label{sec:Ergebnis}
-- hier auf jeden Fall die Forschungsfrage aufgreifen
+\section{Auswertung der Anforderungen}\label{sec:Auswertung}
+In dieser Arbeit wurde ein Softwareartefakt entwickelt, das es den Studierenden der \gls{hwr} ermöglicht, einen Antrag auf Erstattung des Semesterticketbeitrags über ein Onlineformular auf der \gls{asta}-Website einzureichen. Gleichzeitig umfasst die Softwarelösung ein Bearbeitungsportal, zur Verarbeitung der Anträge durch die Mitarbeitenden des Sozialbüros. In Kapitel~\ref{sec:Anforderungsanalyse} wurden funktionale und nicht-funktionale Anforderungen definiert. Im Folgenden soll wird deren Umsetzung bewertet.
 
+Alle funktionalen Anforderungen konnten erfüllt werden. Durch die Realisierung der Lösung als WordPress-Plug-ins, ist die vollständige Integration in die \gls{asta}-Website möglich. Über das Antragsformular geben Studierende alle notwendigen Daten ein und laden erforderliche Nachweise im PDF-Format hoch. Vor dem Absenden müssen die Studierenden den Datenschutzbestimmungen und AGBs zustimmen. Die Daten werden nach dem Absenden des Formulars auf Korrektheit überprüft und soweit möglich validiert. Nach erfolgreicher Prüfung werden alle Daten und der Pfad der hochgeladenen Dokumente in einer relationalen Datenbank gespeichert. Jeder Antrag erhält dadurch eine eindeutige Identifikationsnummer. 
 
+Der Zugriff auf die Anträge ist nur für berechtigte Personen mit entsprechender Rolle (Admin oder Sozialbüro) möglich. Die Mitarbeitenden des Sozialbüros loggen sich über das WordPress-Backend ein und können über den Menüpunkt \glqq{}Anträge\grqq{} auf die Übersicht aller eingegangenen Anträge und die dazugehörige Detailansichten zugreifen. Die Änderungen des Status eines Antrags wird in der Änderungshistorie mit dem Zeitpunkt der Änderung und der ausführenden Person dokumentiert. Aufgrund der implementierten Logik verändert sich der Status bei der Bearbietung korrekt, abhängig vom Kontextstatus.
 
-Das wurde alles gemacht: 
-Ablauf eines Antrags:
+Die nicht-funktionalen Anforderungen sind etwas schwerer zu bewerten. Die Bedienoberfläche des Antragsformulars ist aufgrund klarer beschreibung der Eingabefelder intuitiv nutzbar, ebenso das Bearbeitungsportal, sodass der Schulungsaufwand für neue Mitarbeitende gering bleibt. Die Einhaltung datenschutzrechtlicher Vorgaben ist nur teilweise umgesetzt. Studierende stimmen aktiv der Verarbeitung ihrer Daten zu, die eingegebenen Daten werden sanitized und wenn möglich validiert. Nonces verhindern unerlaubte Zugriffe und ein Rollenkonzept schützt vor unbefugtem Zugriff. Es fehlen weitergehende technische und organisatorische Maßnahmen, wie sie in der \gls{dsgvo} gefordert werden. Eine Verschlüsselung der Daten, ein Lösch- und Aufbewahrungskonzept sowie ein sicherer Umgang mit den im WordPress-Upload-Verzeichnis abgelegten Dokumenten gibt es zum aktuellen Zeitpunkt nicht. Zudem besteht aktuell keine automatisierte Backup-Lösung. 
 
-Studierende Person
-- UI wo man seine Daten eintragen kann und den Antragsgrund auswählt
-- je nach Antragsgrund wird angezeigt, welche Dokumente hochgeladen werden müssen 
-- Bestätigung von AGBs??? und Bestätigung dass alles rechtsmäßig ist???? 
-- Antrag absenden
+Insgesamt wurden alle funktionalen Anforderungen vollständig erfüllt, während die nicht-funktionalen Anforderungen nur teilweise umgesetzt werden konnten. Für die zukünftige Weiterentwicklung gibt es also neben den Abgrenzungskriterien aus Kapitel~\ref{sec:Anforderungsanalyse} weitere Verbesserungsmöglichkeiten.
 
-AStA Sozialbüro: 
-- eigenes Interface, wo aktuelle Anträge angezeigt werden (wie soll das aussehen???)
-- jeder neue Antrag bekommt den Tag ``unbearbeitet''
-- Antrag kann geöffnet werden und der/die Mitarbeiter/in kann den Antrag prüfen -> alle Felder sind beschreibar um im Nachhinein Daten ändern zu können -> Button Daten ändern
+Die sichere Speicherung der Daten und Ablage der Dokumente muss ausgebaut werden. Insbesondere die Verschlüsselung der Zahlungsdaten ist notwendig. Des Weiteren sollte das Bearbeitungsportal die Funktionalität besitzen, fehlerhafte Angaben zu korrigieren und nachgeforderte Dokumente hochzuladen, ohne über den Datenbank-Manager darauf zugreifen zu müssen. Ebenso fehtl aktuell die Möglichkeit hochgeladene Dokuemtne im Bearbeitungsportal anzuschauen, diese Funktion ist jedoch zur Überprüfung eines Antrags notwendig. Die Einführung eines Backup-Systems ist notwendig, um langfristig Datensicherheit zu gewährelisten. Nach der Implementierung aller Funktionen sollten umfassende Softwaretests durchgeführt werden, um eine korrekte Funktionsweise zu sichern.
 
+\section{Fortführung des Projektes}
+Die in dieser Arbeit entwickelte Softwarelösung besitzt das Potenzial, im Sozialbüro des \gls{asta} der \gls{hwr} real eingesetzt zu werden. Nach der Umsetzung der in Kapitel~\ref{sec:Auswertung} beschriebenen Funktionalitäten sind jedoch noch weitere Schritte erforderlich, um einen Einsatz zu ermöglichen. Zunächst sollte das System durch den Datenschutzbeauftragten der \gls{hwr} überprüft werden, um eine \gls{dsgvo}-konforme Speicherung der personenbezogenen Daten zu gewährleisten. In diesem Zusammenhang ist es notwendig, spezifische Datenschutzbestimmungen für den \gls{asta} zu formulieren, die den Prozess der Datenverarbeitung transparent beschreiben. Anschließend sollte die technische Implememtierung durch das IT-Team des \gls{asta} umgesetzt werden. Hierfür wird ein geschütztes Verzeichnis benötigt, in dem Antragsdaten und Dokumente abgelegt werden können, was bislang nicht existiert. Nach der Inbetriebnahme wäre die Anbindung an die Datenbank der \gls{hwr} sinnvoll, um über die Shibboleth-Schnittstelle eine Authentifizierung der Studierenden zu ermöglichen. In einer weiteren Entwicklungsphase könnte das System zudem so ausgebaut werden, dass Studierende sich in ein Portal einloggen, den Bearbeitungsstatus ihres Antrags einsehen, zusätzliche Dokumente hochladen und Änderungen im Portal selbstständig vornehmen können. Die Kommunikation per E-Mail wäre dadurch fast vollständig hinfällig. 
 
-Genereller Aufbau des Projektes: 
-- Server, auf dem alle Daten gespeichert werden -> der muss an die AStA Website angebunden sein (Funktioniert das mit WordPress und wenn ja wie?)
-- eigenes Interface für Mitarbeitende des AStA (Kann das auch eine WordPress Seite sein? oder sollte das was anderes sein?) -> hosten dieser Seite auf dem eigenen Server
-- Wie funktioniert die Verknüpfung hier mit Ultradox? Kann ich Ultradox auf den Server zugreifen lassen? 
-- Wie speicher ich die Daten überhaupt in der Datenbank? 
-- Wie kann ich die Daten änderbar machen in dem Mitarbeiterinterface? und wie kann ich das machen, dass ich dort Dokumente hochlade? 
- 
-Next Steps: 
-- Recherche zu WordPress und möglicher Anbindung an eine Datenbank 
-- Aufbau einer Datenbank mit Testdaten
-- Bau eines Prototyps der Website um die Funktionalität zu testen 
-
-\section{Was fehlt aktuell}
-- Anbindung an Ultradox bzw. eine andere Lösung zur Erstellung der Bewilligungen
-- Ein ausgeprägtes Sicherheitssystem für die Datenbank 
-- Tests auf einem Server
-- Alle Abgrenzungskriterien sind zur realen Verwendung notwendig
-- Ansicht der Dokumente ist aktuell nicht implementiert
-- AGBs und Datenschutzrichtlinien gibt es nicht
+Vor dem Hintergrund der zu Beginn formulierten Forschungsfrage \glqq{}Wie lässt sich der manuelle Antragsprozess des \gls{asta} der \gls{hwr} durch eine automatisierte Softwarelösung verbessern und kann er so den Datenschutzanforderungen gerecht werden?\grqq{}, lässt sich abschließend festhalten, dass der Antragsprozess durch die entwickelte Softwarelösung effizienter gestaltet werden kann. Studierende müssen Antrag mehr ausfüllen und diesen per E-Mail einreichen. Das ist direkt über ein Onlineformular auf der \gls{asta}-Website möglich. Gleichzeitig werden die Mitarbeitenden von zeitaufwändigen manuellen Aufgaben entlastet, sodass die Bearbeitung der Anträge schneller und weniger fehleranfällig erfolgen kann. Die Erfüllung der Datenschutzanforderungen ist möglich, erfordert jedoch zusätzliche technische Maßnahmen, die in dem vorliegenden Artefakt nicht umgesetzt wurden. Eine enge Abstimmung mit dem Datenschutzbeauftragten ist daher für eine tatsächliche Einführung unabdingbar.
