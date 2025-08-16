@@ -84,11 +84,17 @@
 \cleardoublepage
 \include{Formalien/Erklaerung} 
 
+% Anhang beginnen
+\appendix
+
+% Chapter-Nummerierung auf arabische Zahlen umstellen
+\renewcommand{\thechapter}{\arabic{chapter}}
+\setcounter{chapter}{9} % Startet bei 10 (da der Counter um 1 erhöht wird)
+
 \chapter{Anhang}
-\section*{Anhangsverzeichnis}
-\makeatletter
-\@starttoc{app} % liest Einträge, die wir mit \addcontentsline{app}{...}{...} geschrieben haben
-\makeatother
+
+% Sections aus Hauptinhaltsverzeichnis ausblenden
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
 
 \input{Inhalt/Anhang}
 

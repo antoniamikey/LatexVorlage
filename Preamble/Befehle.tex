@@ -103,3 +103,20 @@
 % Spezielle Spaltentypen
 \newcolumntype{x}[1]{>{\raggedleft\hspace{0pt}}p{#1}}
 \newcolumntype{y}[1]{>{\RaggedRight\arraybackslash\hsize=#1\hsize}X}
+
+% Eigene Labels für Anhang-Referenzen definieren
+\makeatletter
+\newcommand{\setanhanglabel}[2]{%
+    \@namedef{r@#1}{{#2}{}{}{}{}}%
+}
+\makeatother
+
+% Anhang-Labels definieren
+\setanhanglabel{app:antrag}{A}
+\setanhanglabel{app:istprozess}{B}
+\setanhanglabel{app:sollprozess}{C}
+\setanhanglabel{app:antragsformular}{D}
+\setanhanglabel{app:antragsuebersicht}{E}
+\setanhanglabel{app:detailansicht}{F}
+\setanhanglabel{app:erm}{G}
+\setanhanglabel{app:datenbankschema}{H}
