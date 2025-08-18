@@ -31,6 +31,8 @@
 \addtokomafont{chapter}{\fontsize{13pt}{13pt}\selectfont}
 \addtokomafont{section}{\fontsize{13pt}{13pt}\selectfont}
 \addtokomafont{subsection}{\fontsize{13pt}{13pt}\selectfont}
+\RedeclareSectionCommand[beforeskip=0.5\baselineskip,afterskip=0.5\baselineskip]{section}
+\RedeclareSectionCommand[beforeskip=0.5\baselineskip,afterskip=0.3\baselineskip]{subsection}
 
 % Schriftgrößen und Textauszeichnung
 \usepackage{relsize}      % Relative Schriftgrößen
@@ -51,6 +53,12 @@
 \usepackage[vflt]{floatflt}  % Textumfluss
 \usepackage{subfigure}       % Teilabbildungen
 \usepackage{rotating}        % Rotation von Elementen
+\usepackage{subcaption}
+\usepackage{caption}
+
+\setlength{\intextsep}{5pt plus 2pt minus 2pt}   % Abstand zwischen Text und Abbildung
+\setlength{\textfloatsep}{5pt plus 2pt minus 2pt} % Abstand zwischen Abbildung und Text
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}     % Abstand zwischen zwei Abbildungen
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HYPERLINKS UND PDF-EINSTELLUNGEN
@@ -96,10 +104,15 @@
     backend=biber,
     style=authoryear,
     language=ngerman,
-    backref=true
+    backref=true,
 ]{biblatex}
+
 \addbibresource{Literatur/Bibliographie.bib}
 
+% DOI, ISBN und URL als normalen Text (Times New Roman)
+\DeclareFieldFormat{doi}{DOI: #1}
+\DeclareFieldFormat{isbn}{ISBN: #1}
+\DeclareFieldFormat{url}{URL: #1}
 
 % To set square brackets for parencite, use:
 \renewcommand*{\mkbibparens}[1]{\mkbibbrackets{#1}}
@@ -127,6 +140,8 @@
 \usepackage{makeidx}
 \usepackage{etoolbox}
 
+\usepackage{etoc}
+\usepackage{float}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MATHEMATIK UND SYMBOLE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -142,6 +157,7 @@
 \usepackage{array}
 \usepackage{longtable}
 \usepackage{ltxtable}
+\usepackage{multicol}
 
 % Listen und Aufzählungen
 \usepackage{paralist}
@@ -154,6 +170,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 
+
 % Grundlegende Farben für Listings
 \definecolor{hellgelb}{rgb}{1,1,0.9}
 \definecolor{colKeys}{rgb}{0.8,0,0.5}
@@ -163,25 +180,29 @@
 
 % Listing-Standardeinstellungen
 \lstset{
-    float=htbp,
-    basicstyle=\ttfamily\color{black}\small\smaller,
-    identifierstyle=,%\color{colIdentifier},
-    keywordstyle=\color{colKeys}\bfseries,
-    stringstyle=\color{colString},
-    commentstyle=\color{colComments},
-    columns=flexible,
-    tabsize=4,
-    frame=single,
-    extendedchars=true,
-    showspaces=false,
-    showstringspaces=false,
-    numbers=left,
-    numberstyle=\tiny,
-    breaklines=true,
-    backgroundcolor=\color{hellgelb},
-    breakautoindent=true,
-    escapeinside={(*}{*)},
-    literate={Ö}{{\"O}}1 {Ä}{{\"A}}1 {Ü}{{\"U}}1 {ß}{{\ss}}2 {ü}{{\"u}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {µ}{\textmu}1
+  float=htbp,
+  basicstyle=\sffamily\small, % serifenlose Schrift
+  identifierstyle=,%\color{colIdentifier},
+  keywordstyle=\color{colKeys}\bfseries,
+  stringstyle=\color{colString},
+  commentstyle=\color{colComments},
+  columns=flexible,
+  tabsize=4,
+  frame=single,
+  extendedchars=true,
+  showspaces=false,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true,
+  backgroundcolor=\color{white}, % weißer Hintergrund
+  breakautoindent=true,
+  escapeinside={(*}{*)},
+  literate={µ}{\textmu}1 {\$}{{\textdollar}}1,
+  literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+           {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+           {ß}{{\ss}}1 {µ}{\textmu}1,
+  captionpos=b, % Caption unter dem Listing
 }
 
 % Sprachdefinitionen für Listings
@@ -237,6 +258,15 @@
     morekeywords={if, for, each, as, condition, controller, arguments, image, link, action, class}
 }
 
+% YAML
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,y,n},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]'
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ZUSÄTZLICHE FUNKTIONALITÄT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -253,3 +283,4 @@
 \usepackage{todonotes}
 \usepackage{xspace}
 \usepackage{datatool}
+\usepackage{placeins}
